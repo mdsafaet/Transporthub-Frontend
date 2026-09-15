@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Login({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,8 +37,8 @@ export default function Login({ onLogin }) {
     <main className="login-page">
       {/* Left: login form */}
       <section className="login-panel">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="inline-flex items-center gap-3 self-start"
           aria-label="TransportNet home"
         >
@@ -48,7 +49,7 @@ export default function Login({ onLogin }) {
           <span className="text-xl font-semibold tracking-tight text-[#071525]">
             Transport<span className="text-[#1684e8]">Net</span>
           </span>
-        </a>
+        </Link>
 
         <div className="login-form-container">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#1684e8]">
