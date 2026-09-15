@@ -1,0 +1,454 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: dark;
+  --background: #071525;
+  --foreground: #fff;
+  --card: #0c2337;
+  --card-foreground: #fff;
+  --primary: #168af0;
+  --primary-foreground: #fff;
+  --border: rgba(255, 255, 255, 0.12);
+  --radius: 1rem;
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: #071525;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+::selection {
+  background: #168af0;
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #071525;
+}
+::-webkit-scrollbar-thumb {
+  background: #284a66;
+  border-radius: 10px;
+}
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+  transform: rotate(-35deg);
+}
+.logo-mark::before,
+.logo-mark::after,
+.logo-mark span {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 20px;
+  background: currentColor;
+}
+.logo-mark::before {
+  transform: translateY(-5px);
+}
+.logo-mark::after {
+  transform: translateY(5px);
+}
+.logo-mark span {
+  width: 12px;
+  transform: rotate(90deg);
+}
+.nav-link {
+  position: relative;
+  opacity: 0.74;
+  transition: opacity 0.2s;
+}
+.nav-link:hover {
+  opacity: 1;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #168af0;
+  transition: width 0.2s;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+.mobile-menu {
+  background: rgba(7, 21, 37, 0.98);
+}
+header.bg-\[\#f7faff\] .nav-link {
+  opacity: 0.65;
+}
+header.bg-\[\#f7faff\] .nav-link:hover {
+  opacity: 1;
+}
+.hero-image {
+  background-size: cover;
+  background-position: center;
+  animation: kenburns 13s ease-out both;
+}
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 17, 30, 0.92) 0%,
+      rgba(4, 17, 30, 0.62) 42%,
+      rgba(4, 17, 30, 0.18) 100%
+    ),
+    linear-gradient(0deg, rgba(4, 17, 30, 0.75), transparent 52%);
+}
+.hero-grid {
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(130, 190, 230, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(130, 190, 230, 0.13) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+.particles {
+  opacity: 0.42;
+  background-image: radial-gradient(
+    circle,
+    rgba(111, 195, 255, 0.8) 1px,
+    transparent 1px
+  );
+  background-size: 150px 150px;
+  animation: drift 18s linear infinite;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+}
+.slide-copy {
+  animation: slide-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.floating-card {
+  animation: float 5s ease-in-out infinite;
+}
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #52dc9c;
+  box-shadow: 0 0 0 5px rgba(82, 220, 156, 0.12);
+}
+.section-pad {
+  padding: 128px 24px;
+}
+.route-map {
+  background-image:
+    radial-gradient(
+      ellipse at 30% 45%,
+      transparent 0 12%,
+      rgba(62, 162, 229, 0.08) 12.2% 12.5%,
+      transparent 12.7%
+    ),
+    radial-gradient(
+      ellipse at 70% 54%,
+      transparent 0 16%,
+      rgba(62, 162, 229, 0.08) 16.2% 16.5%,
+      transparent 16.7%
+    ),
+    linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(69, 176, 255, 0.16) 30.1%,
+      transparent 30.3%
+    ),
+    linear-gradient(
+      25deg,
+      transparent 54%,
+      rgba(69, 176, 255, 0.12) 54.1%,
+      transparent 54.3%
+    );
+  background-size: 100% 100%;
+}
+.service-card {
+  box-shadow: 0 20px 50px rgba(5, 22, 39, 0.12);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s;
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 70px rgba(5, 22, 39, 0.25);
+}
+.about-image {
+  box-shadow: 0 30px 80px rgba(7, 21, 37, 0.18);
+}
+.cta-section {
+  min-height: 590px;
+  display: grid;
+  place-items: center;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.delay-1 {
+  transition-delay: 0.08s;
+}
+.delay-2 {
+  transition-delay: 0.16s;
+}
+.delay-3 {
+  transition-delay: 0.24s;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(80px, 35px, 0);
+  }
+}
+@media (min-width: 1024px) {
+  .section-pad {
+    padding: 150px 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Shared interaction styles. Tailwind theme tokens and custom CSS live here. */
+section[id] {
+  scroll-margin-top: 78px;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 5px;
+}
+
+.testimonial-marquee {
+  --marquee-gap: 20px;
+  --marquee-card-width: clamp(280px, 80vw, 440px);
+
+  overflow: hidden;
+}
+
+.testimonial-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: testimonial-scroll 35s linear infinite;
+}
+
+.testimonial-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: var(--marquee-gap);
+  padding-right: var(--marquee-gap);
+}
+
+.testimonial-marquee-card {
+  flex: 0 0 var(--marquee-card-width);
+  width: var(--marquee-card-width);
+}
+
+.testimonial-marquee:hover .testimonial-marquee-track,
+.testimonial-marquee:focus-within .testimonial-marquee-track,
+.testimonial-marquee.is-paused .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+
+.testimonial-marquee:focus-visible {
+  outline: 2px solid #1684e8;
+  outline-offset: 6px;
+}
+
+@keyframes testimonial-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Show a manually scrollable row when reduced motion is preferred. */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    overflow-x: auto;
+  }
+
+  .testimonial-marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .testimonial-marquee-group[aria-hidden="true"],
+  .testimonial-marquee-toggle {
+    display: none;
+  }
+}
+
+.login-page {
+  display: grid;
+  min-height: 100svh;
+  background: #ffffff;
+  color: #071525;
+  color-scheme: light;
+}
+
+.login-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  padding: 64px 0;
+}
+
+.login-input {
+  display: block;
+  width: 100%;
+  border: 1px solid #dbe3ec;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 15px 16px;
+  color: #071525;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
+}
+
+.login-input::placeholder {
+  color: #94a3b8;
+}
+
+.login-input:focus {
+  border-color: #1684e8;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgb(22 132 232 / 10%);
+}
+
+.login-password-input {
+  padding-right: 52px;
+}
+
+.login-page a:focus-visible,
+.login-page button:focus-visible {
+  outline: 2px solid #1684e8;
+  outline-offset: 4px;
+}
+
+.login-image-panel {
+  position: relative;
+  display: none;
+  overflow: hidden;
+  background: #071525;
+}
+
+.login-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(7 21 37 / 25%) 0%,
+    rgb(7 21 37 / 40%) 40%,
+    rgb(7 21 37 / 92%) 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .login-page {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .login-panel {
+    padding: 40px 56px;
+  }
+
+  .login-image-panel {
+    display: block;
+  }
+}
