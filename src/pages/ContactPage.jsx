@@ -12,19 +12,19 @@ import {
 import Reveal from "../components/common/Reveal";
 import SectionKicker from "../components/common/SectionKicker";
 
-// Replace these sample details with your business information.
+// Replace with your actual business details.
 const contactDetails = [
   {
-    title: "Email us",
+    title: "Email our team",
     value: "hello@transportnet.example",
-    description: "For general questions and shipping enquiries.",
+    description: "For booking, documentation, and shipping enquiries.",
     href: "mailto:hello@transportnet.example",
     Icon: Mail,
   },
   {
-    title: "Call our team",
+    title: "Speak with us",
     value: "+1 212 555 0148",
-    description: "Talk through your requirements with us.",
+    description: "Discuss your container and transport requirements.",
     href: "tel:+12125550148",
     Icon: Phone,
   },
@@ -34,6 +34,16 @@ const contactDetails = [
     description: "City, country, postal code.",
     Icon: MapPin,
   },
+];
+
+const subjects = [
+  ["booking", "Container booking"],
+  ["schedules", "Routes & sailing schedules"],
+  ["tracking", "Container tracking"],
+  ["documents", "Shipping documents"],
+  ["special-cargo", "Reefer & special cargo"],
+  ["inland", "Inland transport"],
+  ["general", "General enquiry"],
 ];
 
 export default function ContactPage() {
@@ -53,6 +63,7 @@ export default function ContactPage() {
       company: formData.get("company").trim(),
       phone: formData.get("phone").trim(),
       subject: formData.get("subject"),
+      reference: formData.get("reference").trim(),
       message: formData.get("message").trim(),
     };
 
@@ -64,26 +75,30 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      // Connect your backend here.
-      // Expected response after sending/saving: { success: true }
+      // Your backend should return { success: true } after saving/sending.
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(data),
       });
 
+      if (!response.ok) {
+        throw new Error("Message submission failed");
+      }
+
       const result = await response.json();
 
-      if (!response.ok || result.success !== true) {
+      if (result?.success !== true) {
         throw new Error("Message submission failed");
       }
 
       setSubmitted(true);
     } catch {
       setError(
-        "Your message could not be sent. Please try again or contact us directly.",
+        "Your message could not be sent. Please try again or contact our team directly.",
       );
     } finally {
       setLoading(false);
@@ -109,36 +124,39 @@ export default function ContactPage() {
                 id="ct-heading"
                 className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
               >
-                Let’s talk about
+                Your next sailing.
                 <br />
-                <span className="text-[#1684e8]">your next move.</span>
+                <span className="text-[#1684e8]">
+                  Starts with a conversation.
+                </span>
               </h1>
 
               <p className="text-sm leading-6 text-slate-500">
-                Have a question, a shipment to plan, or a partnership
-                in mind? Tell us how we can help.
+                Need help with a container booking, sailing schedule,
+                or an existing shipment? Tell us what you need and
+                our team will help you explore the next steps.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Contact information and form */}
+      {/* Contact details and form */}
       <section
         className="ct-main-section"
-        aria-label="Contact information and message form"
+        aria-label="Contact information and enquiry form"
       >
         <div className="ct-container ct-layout">
           <div>
             <Reveal>
               <h2 className="text-2xl font-semibold tracking-tight">
-                A conversation starts here.
+                Talk to our shipping team.
               </h2>
 
               <p className="mt-4 text-sm leading-6 text-slate-500">
-                Choose the way that works best for you. Our team can
-                help you understand services, requirements, and next
-                steps.
+                From port connections to shipping documents, we can
+                help you understand your options and coordinate your
+                enquiry.
               </p>
             </Reveal>
 
@@ -188,11 +206,9 @@ export default function ContactPage() {
 
                 <div>
                   <p className="text-sm font-semibold">Office hours</p>
+                  {/* Replace with your actual hours and time zone. */}
                   <p className="mt-2 text-sm leading-6 text-slate-500">
                     Monday–Friday, 9:00 AM–6:00 PM
-                  </p>
-                  <p className="mt-1 text-xs text-slate-500">
-                    Update with your office’s time zone.
                   </p>
                 </div>
               </div>
@@ -211,12 +227,12 @@ export default function ContactPage() {
                   id="ct-form-heading"
                   className="text-2xl font-semibold tracking-tight"
                 >
-                  How can we help?
+                  How can we help your shipment?
                 </h2>
 
                 <p className="mt-3 text-sm leading-6 text-slate-500">
-                  Share a few details and our team will review your
-                  message.
+                  Select a subject and share the details so we can
+                  direct your enquiry to the right team.
                 </p>
               </div>
 
@@ -227,12 +243,12 @@ export default function ContactPage() {
                   </span>
 
                   <h3 className="text-2xl font-semibold tracking-tight">
-                    Message received!
+                    Enquiry received!
                   </h3>
 
                   <p className="mt-3 text-sm leading-6 text-slate-500">
-                    Thank you for getting in touch. Our team will
-                    review your enquiry and get back to you.
+                    Thank you for contacting TransportNet. Our team
+                    will review your message and get back to you.
                   </p>
 
                   <button
@@ -240,7 +256,7 @@ export default function ContactPage() {
                     className="ct-submit"
                     onClick={() => setSubmitted(false)}
                   >
-                    Send another message
+                    Send another enquiry
                     <ArrowUpRight size={18} aria-hidden="true" />
                   </button>
                 </div>
@@ -296,7 +312,7 @@ export default function ContactPage() {
 
                       <div className="ct-full-width">
                         <label htmlFor="ct-subject">
-                          What is your enquiry about? *
+                          Enquiry subject *
                         </label>
 
                         <select
@@ -308,14 +324,26 @@ export default function ContactPage() {
                           <option value="" disabled>
                             Select a subject
                           </option>
-                          <option value="general">General enquiry</option>
-                          <option value="services">Our services</option>
-                          <option value="shipment">
-                            Existing shipment
-                          </option>
-                          <option value="partnership">Partnership</option>
-                          <option value="other">Something else</option>
+
+                          {subjects.map(([value, label]) => (
+                            <option key={value} value={value}>
+                              {label}
+                            </option>
+                          ))}
                         </select>
+                      </div>
+
+                      <div className="ct-full-width">
+                        <label htmlFor="ct-reference">
+                          Booking or container reference
+                        </label>
+                        <input
+                          id="ct-reference"
+                          name="reference"
+                          type="text"
+                          spellCheck={false}
+                          placeholder="If you have an existing shipment"
+                        />
                       </div>
 
                       <div className="ct-full-width">
@@ -324,7 +352,7 @@ export default function ContactPage() {
                           id="ct-message"
                           name="message"
                           rows={5}
-                          placeholder="Tell us how we can help. For an existing shipment, include your reference number."
+                          placeholder="Tell us about your enquiry. Include relevant ports, cargo details, or preferred sailing dates."
                           required
                         />
                       </div>
@@ -348,11 +376,11 @@ export default function ContactPage() {
                             aria-hidden="true"
                             className="ct-spinner"
                           />
-                          Sending message…
+                          Sending enquiry…
                         </>
                       ) : (
                         <>
-                          Send message
+                          Send enquiry
                           <ArrowUpRight size={18} aria-hidden="true" />
                         </>
                       )}
@@ -369,24 +397,27 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Quote call to action */}
-      <section className="ct-quote-section" aria-labelledby="ct-quote-heading">
+      {/* Quote */}
+      <section
+        className="ct-quote-section"
+        aria-labelledby="ct-quote-heading"
+      >
         <div className="ct-container">
           <Reveal>
             <div className="ct-quote-banner">
               <div>
-                <p className="ct-eyebrow">Ready to ship?</p>
+                <p className="ct-eyebrow">Plan your container shipment</p>
 
                 <h2
                   id="ct-quote-heading"
                   className="text-2xl font-semibold tracking-tight sm:text-3xl"
                 >
-                  Looking for a shipping quote?
+                  Looking for a freight quotation?
                 </h2>
 
                 <p className="mt-3 text-sm leading-6">
-                  Share your cargo details through our dedicated
-                  quote form.
+                  Share your origin, destination, and container
+                  requirements through our quote form.
                 </p>
               </div>
 

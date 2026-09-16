@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -11,119 +11,114 @@ import {
 
 const articles = [
   {
-    id: "planning-freight",
+    id: "container-shipping-planning",
     category: "Shipping Guides",
-    title: "A better shipment starts with a clearer plan.",
+    title: "A better container shipment starts with a clear plan.",
     excerpt:
-      "The details worth preparing before you request a freight quote.",
+      "Key information to prepare before arranging a port-to-port container shipment.",
     image:
       "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1400&q=85",
-    alt: "Container ship carrying freight",
-    readTime: "2 min read",
+    alt: "Container vessel transporting containers",
+    readTime: "3 min read",
     content: [
       {
-        heading: "Start with the cargo",
+        heading: "Prepare your cargo details",
         text:
-          "Prepare a clear description of what you are shipping. Include the number of packages, their dimensions, total weight, and how the goods are packed. These details help a logistics provider understand your handling and space requirements.",
+          "Before requesting a shipping arrangement, prepare information about your cargo, including container type, cargo description, weight, and any special handling requirements.",
       },
       {
-        heading: "Describe the full journey",
+        heading: "Define origin and destination ports",
         text:
-          "Share the collection and delivery locations, including any access restrictions. A commercial warehouse, residential address, and port terminal can each require different arrangements.",
+          "Clear origin and destination port details help determine suitable sailing options, estimated departure times, and expected arrival windows.",
       },
       {
-        heading: "Make timing clear",
+        heading: "Keep shipping documents ready",
         text:
-          "Explain when the cargo will be ready and when you would like it to arrive. Distinguishing a preferred date from a firm deadline makes it easier to discuss suitable options.",
-      },
-      {
-        heading: "Compare the scope",
-        text:
-          "When reviewing quotes, check which services are included. Ask about collection, handling, delivery, and any items that need a separate estimate so you can compare equivalent services.",
+          "Documents such as booking references, commercial invoices, packing lists, and bills of lading help maintain smooth coordination throughout the shipment journey.",
       },
     ],
   },
   {
-    id: "ocean-air-road",
-    category: "Freight Solutions",
-    title: "Ocean, air, or road: where should you start?",
+    id: "scheduled-sailings",
+    category: "Routes & Schedules",
+    title: "Understanding scheduled sailings and transit planning.",
     excerpt:
-      "A practical way to discuss transport options around your cargo and priorities.",
+      "How shipping schedules help businesses plan international container movements.",
     image:
-      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1000&q=85",
-    alt: "Aircraft on an airport apron",
-    readTime: "2 min read",
+      "https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?auto=format&fit=crop&w=1200&q=85",
+    alt: "Cargo containers at a port terminal",
+    readTime: "4 min read",
     content: [
       {
-        heading: "Begin with your priorities",
+        heading: "Review sailing availability",
         text:
-          "The right transport discussion starts with your delivery deadline, budget, shipment size, and destination. Sharing these priorities helps your provider narrow down the available options.",
+          "Liner shipping operates with scheduled services. Reviewing available sailings helps align cargo readiness with planned vessel departures.",
       },
       {
-        heading: "Consider the complete route",
+        heading: "Consider transit timelines",
         text:
-          "A shipment may use more than one type of transport. Collection, transfers, and final delivery all contribute to the overall journey, so ask about the complete plan rather than a single leg.",
+          "Estimated departure and arrival dates provide visibility for inventory planning, customer commitments, and inland transportation arrangements.",
       },
       {
-        heading: "Ask about trade-offs",
+        heading: "Plan beyond the port",
         text:
-          "Request a comparison of suitable options, including the estimated schedule, included services, and any assumptions. The best choice depends on the needs of the individual shipment.",
+          "A complete shipment plan should consider port handling, customs processes, and inland transportation after vessel arrival.",
       },
     ],
   },
   {
-    id: "warehouse-handover",
-    category: "Warehousing",
-    title: "Make your next warehouse handover simpler.",
+    id: "container-types",
+    category: "Container Solutions",
+    title: "Choosing the right container for your cargo.",
     excerpt:
-      "Clear labels, shared information, and a little preparation can improve coordination.",
+      "Understanding dry containers, reefer containers, and special cargo requirements.",
     image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1000&q=85",
-    alt: "Organized warehouse storage racks",
-    readTime: "2 min read",
+      "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=1200&q=85",
+    alt: "Rows of shipping containers at terminal",
+    readTime: "3 min read",
     content: [
       {
-        heading: "Agree on the receiving details",
+        heading: "Dry containers",
         text:
-          "Confirm the receiving location, contact person, and delivery window before dispatch. Share the expected number of packages and any handling requirements with the receiving team.",
+          "Standard dry containers are commonly used for general cargo that does not require temperature control or specialized equipment.",
       },
       {
-        heading: "Keep identification consistent",
+        heading: "Reefer containers",
         text:
-          "Use clear references across your package labels and shipment information. Consistent identification makes it easier for teams to match arriving goods to the expected delivery.",
+          "Reefer containers provide temperature-controlled transportation for cargo that requires specific environmental conditions.",
       },
       {
-        heading: "Plan the next step",
+        heading: "Special cargo planning",
         text:
-          "Explain whether goods will remain in storage, be prepared for dispatch, or move directly onward. This helps the warehouse team understand the intended flow of the shipment.",
+          "Oversized, sensitive, or regulated cargo may require additional planning, documentation, and handling arrangements.",
       },
     ],
   },
   {
-    id: "shipment-communication",
-    category: "Supply Chain",
-    title: "Better communication at every handoff.",
+    id: "shipment-visibility",
+    category: "Container Tracking",
+    title: "Improving shipment visibility from booking to arrival.",
     excerpt:
-      "Build a shared understanding of responsibilities, milestones, and next steps.",
+      "Why accurate references and updates matter throughout the container journey.",
     image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=85",
-    alt: "Warehouse used for supply chain operations",
-    readTime: "2 min read",
+      "https://images.unsplash.com/photo-1586528116493-da8b5a8d9f8b?auto=format&fit=crop&w=1200&q=85",
+    alt: "Container logistics operations",
+    readTime: "3 min read",
     content: [
       {
-        heading: "Choose a clear point of contact",
+        heading: "Use accurate shipment references",
         text:
-          "Identify who will coordinate shipment questions and who can make decisions when plans change. Share contact details with the people involved in collection and delivery.",
+          "Container numbers, booking references, and bills of lading provide important references for tracking and communication.",
       },
       {
-        heading: "Define useful milestones",
+        heading: "Monitor important milestones",
         text:
-          "Agree on which updates matter to your team, such as collection, departure, arrival, and delivery. A shared understanding helps keep communication focused.",
+          "Key milestones may include booking confirmation, vessel departure, port arrival, and inland delivery progress.",
       },
       {
-        heading: "Keep changes visible",
+        heading: "Coordinate with your team",
         text:
-          "When shipment details change, share the revised information with the relevant teams. Keeping references, dates, and instructions aligned helps avoid confusion.",
+          "Keeping shipment information updated helps different teams coordinate decisions and respond quickly when changes occur.",
       },
     ],
   },
@@ -132,29 +127,29 @@ const articles = [
 const categories = [
   "All",
   "Shipping Guides",
-  "Freight Solutions",
-  "Warehousing",
-  "Supply Chain",
+  "Routes & Schedules",
+  "Container Solutions",
+  "Container Tracking",
 ];
 
 function ArticleDialog({ article, onClose }) {
   const dialogRef = useRef(null);
-  const closeButtonRef = useRef(null);
+  const closeRef = useRef(null);
 
   useEffect(() => {
     if (!article) return;
 
     const dialog = dialogRef.current;
     const previousFocus = document.activeElement;
-    const previousOverflow = document.body.style.overflow;
 
     dialog.showModal();
     document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
+
+    closeRef.current?.focus();
 
     return () => {
       dialog.close();
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = "";
 
       if (previousFocus instanceof HTMLElement) {
         previousFocus.focus();
@@ -165,92 +160,87 @@ function ArticleDialog({ article, onClose }) {
   return (
     <dialog
       ref={dialogRef}
-      className="ins-article-dialog"
-      aria-labelledby="ins-article-title"
-      onCancel={(event) => {
-        event.preventDefault();
+      className="w-full max-w-4xl rounded-3xl p-0 shadow-2xl backdrop:bg-black/60"
+      aria-labelledby="article-title"
+      onCancel={(e) => {
+        e.preventDefault();
         onClose();
-      }}
-      onClick={(event) => {
-        if (event.target !== event.currentTarget) return;
-
-        const bounds = event.currentTarget.getBoundingClientRect();
-        const outside =
-          event.clientX < bounds.left ||
-          event.clientX > bounds.right ||
-          event.clientY < bounds.top ||
-          event.clientY > bounds.bottom;
-
-        if (outside) onClose();
       }}
     >
       {article && (
-        <>
-          <div className="ins-dialog-toolbar">
-            <span>{article.category}</span>
+        <div className="max-h-[90vh] overflow-y-auto bg-white">
+          <div className="flex items-center justify-between border-b p-5">
+            <span className="text-sm font-medium text-[#1684e8]">
+              {article.category}
+            </span>
 
             <button
-              ref={closeButtonRef}
-              type="button"
+              ref={closeRef}
               onClick={onClose}
+              className="rounded-full p-2 text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#1684e8]"
               aria-label="Close article"
-              className="ins-close"
             >
-              <X size={20} aria-hidden="true" />
+              <X size={20} />
             </button>
           </div>
 
           <img
             src={article.image}
             alt={article.alt}
-            className="ins-dialog-image"
+            className="h-72 w-full object-cover"
           />
 
-          <article className="ins-dialog-body">
-            <p className="ins-meta">
-              <Clock3 size={14} aria-hidden="true" />
+          <article className="p-6 sm:p-10">
+            <div className="flex items-center gap-2 text-sm text-slate-500">
+              <Clock3 size={14} />
               {article.readTime}
-            </p>
+            </div>
 
             <h2
-              id="ins-article-title"
-              className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl"
+              id="article-title"
+              className="mt-5 text-3xl font-semibold tracking-tight text-[#071525] sm:text-4xl"
             >
               {article.title}
             </h2>
 
-            <p className="mt-5 text-sm leading-6 text-slate-500">
+            <p className="mt-4 text-slate-500">
               {article.excerpt}
             </p>
 
-            {article.content.map(({ heading, text }) => (
-              <section key={heading} className="ins-article-section">
-                <h3 className="text-xl font-semibold tracking-tight">
-                  {heading}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {text}
-                </p>
-              </section>
-            ))}
+            <div className="mt-8 space-y-8">
+              {article.content.map((section) => (
+                <section key={section.heading}>
+                  <h3 className="text-xl font-semibold text-[#071525]">
+                    {section.heading}
+                  </h3>
 
-            <a href="/request-quote" className="ins-primary-link mt-8">
+                  <p className="mt-3 leading-7 text-slate-600">
+                    {section.text}
+                  </p>
+                </section>
+              ))}
+            </div>
+
+            <Link
+              to="/request-quote"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#1684e8] px-5 py-3 text-sm font-medium text-white hover:bg-[#126ec4] focus:outline-none focus:ring-2 focus:ring-[#1684e8]"
+            >
               Discuss your shipment
-              <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+              <ArrowUpRight size={18} />
+            </Link>
           </article>
-        </>
+        </div>
       )}
     </dialog>
   );
 }
-
 export default function Insights() {
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   const featured = articles[0];
+
   const query = search.trim().toLowerCase();
 
   const filteredArticles = articles.filter((article) => {
@@ -266,247 +256,281 @@ export default function Insights() {
     return matchesCategory && matchesSearch;
   });
 
-  const resetFilters = () => {
+  const clearFilters = () => {
     setCategory("All");
     setSearch("");
   };
 
   return (
-    <main className="ins-page">
-      <header className="ins-header">
-        <div className="ins-container ins-navigation">
-          <a href="/" className="ins-logo" aria-label="TransportNet home">
-            Transport<span>Net</span>
-          </a>
-
-          <a href="/" className="ins-back">
-            <ArrowLeft size={16} aria-hidden="true" />
-            Back to home
-          </a>
-        </div>
-      </header>
-
-      <div className="ins-container">
-        {/* Introduction */}
-        <section className="ins-intro" aria-labelledby="ins-heading">
-          <p className="ins-eyebrow">
-            <span aria-hidden="true" />
-            Insights & resources
+    <main className="bg-[#f6f9fc] text-[#071525]">
+      {/* Hero */}
+      <section className="mx-auto max-w-[1380px] px-5 pb-16 pt-20 sm:px-8 lg:px-10">
+        <div className="max-w-3xl">
+          <p className="mb-5 flex items-center gap-2 text-sm font-medium text-[#1684e8]">
+            <span className="h-2 w-2 rounded-full bg-[#1684e8]" />
+            Insights & Shipping Resources
           </p>
 
-          <div className="ins-intro-row">
-            <h1
-              id="ins-heading"
-              className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
-            >
-              Fresh thinking.
-              <br />
-              <span className="text-[#1684e8]">Smarter shipping.</span>
-            </h1>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
+            Fresh thinking.
+            <br />
+            <span className="text-[#1684e8]">
+              Smarter container shipping.
+            </span>
+          </h1>
 
-            <p className="ins-intro-description text-sm leading-6 text-slate-500">
-              Practical guides and useful perspectives to help you
-              understand logistics and plan your next move.
-            </p>
-          </div>
-        </section>
+          <p className="mt-6 max-w-xl text-sm leading-7 text-slate-500 sm:text-base">
+            Explore practical guides about scheduled sailings, container
+            transportation, shipping documents, tracking visibility, and
+            international logistics planning.
+          </p>
+        </div>
+      </section>
 
-        {/* Featured article */}
-        <section aria-labelledby="ins-featured-title">
-          <div className="ins-featured">
-            <div className="ins-featured-image">
+      <div className="mx-auto max-w-[1380px] space-y-16 px-5 pb-20 sm:px-8 lg:px-10">
+
+        {/* Featured */}
+        <section>
+          <div className="grid overflow-hidden rounded-3xl bg-white shadow-sm lg:grid-cols-2">
+
+            <div className="relative h-72 lg:h-auto">
               <img
                 src={featured.image}
                 alt={featured.alt}
-                width="1400"
-                height="900"
+                className="h-full w-full object-cover"
               />
 
-              <span className="ins-featured-badge">
-                <BookOpen size={15} aria-hidden="true" />
-                Editor’s pick
+              <span className="absolute left-5 top-5 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-medium text-[#071525]">
+                <BookOpen size={14} />
+                Featured guide
               </span>
             </div>
 
-            <div className="ins-featured-content">
-              <p className="ins-eyebrow">{featured.category}</p>
+            <div className="flex flex-col justify-center p-7 sm:p-10">
 
-              <h2
-                id="ins-featured-title"
-                className="text-3xl font-semibold tracking-tight sm:text-4xl"
-              >
+              <p className="text-sm font-medium text-[#1684e8]">
+                {featured.category}
+              </p>
+
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight">
                 {featured.title}
               </h2>
 
-              <p className="mt-4 text-sm leading-6 text-slate-500">
+              <p className="mt-4 leading-7 text-slate-500">
                 {featured.excerpt}
               </p>
 
-              <p className="ins-meta mt-5">
-                <Clock3 size={14} aria-hidden="true" />
+              <div className="mt-5 flex items-center gap-2 text-sm text-slate-500">
+                <Clock3 size={14} />
                 {featured.readTime}
-              </p>
+              </div>
 
               <button
                 type="button"
-                className="ins-read-button"
-                aria-haspopup="dialog"
                 onClick={() => setSelectedArticle(featured)}
+                className="mt-7 inline-flex w-fit items-center gap-2 rounded-xl bg-[#1684e8] px-5 py-3 text-sm font-medium text-white hover:bg-[#126ec4] focus:outline-none focus:ring-2 focus:ring-[#1684e8]"
               >
-                Read the guide
-                <ArrowUpRight size={18} aria-hidden="true" />
+                Read guide
+                <ArrowUpRight size={18} />
               </button>
+
             </div>
+
           </div>
         </section>
 
-        {/* Articles */}
-        <section className="ins-library" aria-labelledby="ins-library-title">
-          <div className="ins-library-heading">
-            <h2
-              id="ins-library-title"
-              className="text-2xl font-semibold tracking-tight"
-            >
+
+        {/* Library */}
+        <section>
+
+          <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
+
+            <h2 className="text-2xl font-semibold">
               Explore our insights
             </h2>
 
-            <div className="ins-search">
-              <Search size={18} aria-hidden="true" />
-              <label htmlFor="ins-search" className="ins-sr-only">
+
+            <div className="relative w-full lg:w-96">
+
+              <Search
+                size={18}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              />
+
+              <label htmlFor="article-search" className="sr-only">
                 Search articles
               </label>
+
               <input
-                id="ins-search"
+                id="article-search"
                 type="search"
-                placeholder="Search articles..."
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search shipping articles..."
+                className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[#1684e8] focus:ring-2 focus:ring-[#1684e8]/20"
               />
+
             </div>
+
           </div>
 
-          <div
-            className="ins-filters"
-            role="group"
-            aria-label="Filter articles by category"
-          >
+
+          {/* Filters */}
+          <div className="mt-6 flex flex-wrap gap-3">
+
             {categories.map((item) => (
               <button
                 key={item}
                 type="button"
                 aria-pressed={category === item}
-                className={`ins-filter ${
-                  category === item ? "is-active" : ""
-                }`}
                 onClick={() => setCategory(item)}
+                className={`rounded-full px-4 py-2 text-sm transition ${
+                  category === item
+                    ? "bg-[#1684e8] text-white"
+                    : "bg-white text-slate-600 hover:bg-slate-100"
+                }`}
               >
                 {item}
               </button>
             ))}
+
           </div>
 
-          <p className="ins-result-count" role="status">
+
+          <p className="mt-6 text-sm text-slate-500">
             {filteredArticles.length}{" "}
-            {filteredArticles.length === 1 ? "article" : "articles"}
+            {filteredArticles.length === 1
+              ? "article"
+              : "articles"}
           </p>
 
-          {filteredArticles.length > 0 ? (
-            <div className="ins-grid">
-              {filteredArticles.map((article) => (
-                <article key={article.id} className="ins-card">
-                  <div className="ins-card-image">
-                    <img
-                      src={article.image}
-                      alt={article.alt}
-                      loading="lazy"
-                      width="1000"
-                      height="650"
-                    />
-                    <span>{article.category}</span>
-                  </div>
 
-                  <div className="ins-card-content">
-                    <p className="ins-meta">
-                      <Clock3 size={14} aria-hidden="true" />
-                      {article.readTime}
+          {/* Cards */}
+          {filteredArticles.length > 0 ? (
+
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+              {filteredArticles.map((article) => (
+
+                <article
+                  key={article.id}
+                  className="overflow-hidden rounded-3xl bg-white shadow-sm transition hover:-translate-y-1"
+                >
+
+                  <img
+                    src={article.image}
+                    alt={article.alt}
+                    loading="lazy"
+                    className="h-52 w-full object-cover"
+                  />
+
+
+                  <div className="p-6">
+
+                    <p className="text-xs font-medium text-[#1684e8]">
+                      {article.category}
                     </p>
 
-                    <h3 className="mt-4 text-xl font-semibold tracking-tight">
+
+                    <h3 className="mt-3 text-xl font-semibold">
                       {article.title}
                     </h3>
+
 
                     <p className="mt-3 text-sm leading-6 text-slate-500">
                       {article.excerpt}
                     </p>
 
-                    <button
-                      type="button"
-                      className="ins-card-link"
-                      aria-haspopup="dialog"
-                      aria-label={`Read article: ${article.title}`}
-                      onClick={() => setSelectedArticle(article)}
-                    >
-                      Read article
-                      <ArrowRight size={16} aria-hidden="true" />
-                    </button>
+
+                    <div className="mt-5 flex items-center justify-between">
+
+                      <span className="flex items-center gap-2 text-sm text-slate-500">
+                        <Clock3 size={14} />
+                        {article.readTime}
+                      </span>
+
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedArticle(article)}
+                        className="inline-flex items-center gap-2 text-sm font-medium text-[#1684e8] hover:underline"
+                      >
+                        Read
+                        <ArrowRight size={16} />
+                      </button>
+
+                    </div>
+
                   </div>
+
                 </article>
+
               ))}
+
             </div>
+
           ) : (
-            <div className="ins-empty">
-              <Search size={28} aria-hidden="true" />
+
+            <div className="mt-8 rounded-3xl bg-white p-10 text-center">
+
+              <Search className="mx-auto text-slate-400" />
+
               <h3 className="mt-4 text-xl font-semibold">
                 No articles found
               </h3>
+
               <p className="mt-2 text-sm text-slate-500">
-                Try another keyword or choose a different category.
+                Try another keyword or category.
               </p>
+
+
               <button
-                type="button"
-                className="ins-read-button"
-                onClick={resetFilters}
+                onClick={clearFilters}
+                className="mt-5 rounded-xl bg-[#1684e8] px-5 py-3 text-sm font-medium text-white"
               >
                 Clear filters
               </button>
+
             </div>
+
           )}
+
         </section>
 
-        {/* Contact strip */}
-        <section className="ins-contact" aria-labelledby="ins-contact-title">
+
+        {/* CTA */}
+        <section className="flex flex-col justify-between gap-6 rounded-3xl bg-[#071525] p-8 text-white sm:p-10 lg:flex-row lg:items-center">
+
           <div>
-            <h2
-              id="ins-contact-title"
-              className="text-2xl font-semibold tracking-tight"
-            >
-              Turn your next idea into a shipment.
+            <h2 className="text-2xl font-semibold">
+              Ready to plan your next shipment?
             </h2>
-            <p className="mt-3 text-sm leading-6">
-              Share your requirements and let’s plan the journey.
+
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Share your route, cargo requirements, and preferred schedule
+              with our shipping team.
             </p>
           </div>
 
-          <a href="/request-quote" className="ins-primary-link">
+
+          <Link
+            to="/request-quote"
+            className="inline-flex w-fit items-center gap-2 rounded-xl bg-[#1684e8] px-5 py-3 text-sm font-medium text-white hover:bg-[#126ec4]"
+          >
             Request a quote
-            <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
+            <ArrowUpRight size={18} />
+          </Link>
+
         </section>
+
       </div>
 
-      <footer className="ins-footer">
-        <div className="ins-container">
-          <p>
-            © {new Date().getFullYear()} TransportNet. All rights reserved.
-          </p>
-          <a href="/#contact">Contact our team</a>
-        </div>
-      </footer>
 
       <ArticleDialog
         article={selectedArticle}
         onClose={() => setSelectedArticle(null)}
       />
+
     </main>
   );
 }

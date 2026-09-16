@@ -7,6 +7,7 @@ import RequestQuote from "../pages/RequestQuote";
 import Insights from "../pages/Insights";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
+import Schedules from "../pages/Schedules";
 
 
 
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
       },{
         path:'/contact',
         element: <ContactPage />
+      },{
+        path:'/schedules',
+        element: <Schedules />
       }
    
 

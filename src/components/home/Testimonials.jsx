@@ -3,30 +3,36 @@ import { Pause, Play } from "lucide-react";
 import SectionKicker from "../common/SectionKicker";
 import Reveal from "../common/Reveal";
 
+// Sample testimonials for layout preview.
 const testimonials = [
-  [
-    "“CargoSphere gives our team the confidence to move faster. Every shipment feels accounted for.”",
-    "Maya Chen",
-    "VP Operations, Novera Group",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80",
-  ],
-  [
-    "“We reduced delays by 32% in our first year. Their visibility platform changed the way we work.”",
-    "Daniel Okafor",
-    "Director, Meridian Retail",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
-  ],
-  [
-    "“A true extension of our team—from first mile to final delivery, they make global feel local.”",
-    "Sofia Laurent",
-    "COO, Atelier Maison",
-    "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=160&q=80",
-  ],
+  {
+    quote:
+      "“Clear sailing information and helpful booking support make planning our container shipments easier.”",
+    name: "Sample Customer",
+    role: "Export Operations",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    quote:
+      "“From the initial booking to the destination port, we appreciate knowing who to contact and what comes next.”",
+    name: "Sample Customer",
+    role: "Import Management",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
+  },
+  {
+    quote:
+      "“Coordinating ocean transport and inland delivery through one team helps simplify our shipping arrangements.”",
+    name: "Sample Customer",
+    role: "Supply Chain Operations",
+    image:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=160&q=80",
+  },
 ];
 
-function TestimonialCard({ testimonial, index }) {
-  const [quote, name, role, image] = testimonial;
-  const highlighted = index === 1;
+function TestimonialCard({ testimonial, highlighted }) {
+  const { quote, name, role, image } = testimonial;
 
   return (
     <article
@@ -34,17 +40,13 @@ function TestimonialCard({ testimonial, index }) {
         highlighted ? "bg-[#0b2942] text-white" : "bg-white"
       }`}
     >
-      <div
-        className="flex gap-1 text-[#1684e8]"
-        role="img"
-        aria-label="5 out of 5 stars"
+      <p
+        className={`text-xs font-semibold uppercase tracking-widest ${
+          highlighted ? "text-[#79c2ff]" : "text-[#1684e8]"
+        }`}
       >
-        {[1, 2, 3, 4, 5].map((star) => (
-          <span key={star} aria-hidden="true">
-            ★
-          </span>
-        ))}
-      </div>
+        Sample customer story
+      </p>
 
       <blockquote className="mb-10 mt-8 flex-1 text-xl font-medium leading-8 tracking-tight">
         {quote}
@@ -57,7 +59,7 @@ function TestimonialCard({ testimonial, index }) {
       >
         <img
           src={image}
-          alt={name}
+          alt=""
           loading="lazy"
           width="44"
           height="44"
@@ -84,16 +86,23 @@ export default function Testimonials() {
 
   return (
     <section
-      id="insights"
+      id="testimonials"
       className="section-pad bg-[#eef4f8] text-[#071525]"
+      aria-labelledby="testimonials-heading"
     >
       <div className="mx-auto max-w-[1380px]">
         <Reveal>
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
               <SectionKicker>Customer stories</SectionKicker>
-              <h2 className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl">
-                Trusted in motion.
+
+              <h2
+                id="testimonials-heading"
+                className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
+              >
+                Connections beyond
+                <br />
+                <span className="text-[#1684e8]">the destination.</span>
               </h2>
             </div>
 
@@ -124,7 +133,6 @@ export default function Testimonials() {
           tabIndex={0}
         >
           <div className="testimonial-marquee-track">
-            {/* Two identical groups create a seamless loop. */}
             {[0, 1].map((group) => (
               <div
                 key={group}
@@ -133,9 +141,9 @@ export default function Testimonials() {
               >
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard
-                    key={testimonial[1]}
+                    key={testimonial.role}
                     testimonial={testimonial}
-                    index={index}
+                    highlighted={index === 1}
                   />
                 ))}
               </div>

@@ -3,15 +3,16 @@ import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const services = [
-  "Ocean Freight",
-  "Air Freight",
-  "Land Transport",
-  "Warehousing",
-  "Customs Clearance",
+  "Container Shipping",
+  "Port-to-Port Services",
+  "Door-to-Door Transport",
+  "Reefer Containers",
+  "Special Cargo",
 ];
 
 const navigation = [
-  { label: "Tracking", to: "/tracking" },
+  { label: "Routes & Schedules", to: "/schedules" },
+  { label: "Container Tracking", to: "/tracking" },
   { label: "About", to: "/about" },
   { label: "Insights", to: "/insights" },
   { label: "Contact", to: "/contact" },
@@ -34,15 +35,12 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu when switching to desktop.
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 1024px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
 
     const handleResize = () => {
-      if (desktop.matches) {
-        setMenuOpen(false);
-        setServicesOpen(false);
-      }
+      setMenuOpen(false);
+      setServicesOpen(false);
     };
 
     desktop.addEventListener("change", handleResize);
@@ -50,20 +48,19 @@ export default function Header() {
     return () => desktop.removeEventListener("change", handleResize);
   }, []);
 
-  // Scroll after navigation without reloading the page.
   useEffect(() => {
     setMenuOpen(false);
     setServicesOpen(false);
 
     const frame = window.requestAnimationFrame(() => {
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
       if (hash) {
         const section = document.getElementById(
           decodeURIComponent(hash.slice(1)),
         );
+
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
         section?.scrollIntoView({
           behavior: reducedMotion ? "instant" : "smooth",
@@ -98,7 +95,7 @@ export default function Header() {
           className="flex shrink-0 items-center gap-3"
           aria-label="TransportNet home"
         >
-          <span className="logo-mark">
+          <span className="logo-mark" aria-hidden="true">
             <span />
           </span>
 
@@ -110,8 +107,19 @@ export default function Header() {
         {/* Desktop navigation */}
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-5 text-[13px] font-medium lg:flex xl:gap-8"
+          className="hidden items-center gap-4 text-[13px] font-medium xl:flex"
         >
+          <Link
+            to="/"
+            onClick={closeMenus}
+            aria-current={pathname === "/" && !hash ? "page" : undefined}
+            className={`nav-link whitespace-nowrap ${
+              pathname === "/" && !hash ? "text-[#1684e8]" : ""
+            }`}
+          >
+            Home
+          </Link>
+
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -133,9 +141,9 @@ export default function Header() {
               aria-expanded={servicesOpen}
               aria-controls="desktop-services"
               onClick={() => setServicesOpen((open) => !open)}
-              className="nav-link flex items-center gap-1 py-2"
+              className="nav-link flex items-center gap-1 whitespace-nowrap py-2"
             >
-              Services
+              Our Services
               <ChevronDown
                 aria-hidden="true"
                 className={`size-3.5 transition-transform ${
@@ -163,27 +171,23 @@ export default function Header() {
             )}
           </div>
 
-          {navigation.map((item) => {
-            const active = pathname === item.to;
-
-            return (
-              <Link
-                key={item.label}
-                to={item.to}
-                onClick={closeMenus}
-                aria-current={active ? "page" : undefined}
-                className={`nav-link ${
-                  active ? "text-[#1684e8]" : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {navigation.map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              onClick={closeMenus}
+              aria-current={pathname === to ? "page" : undefined}
+              className={`nav-link whitespace-nowrap ${
+                pathname === to ? "text-[#1684e8]" : ""
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden shrink-0 items-center gap-5 xl:flex">
           <Link
             to="/login"
             onClick={closeMenus}
@@ -209,7 +213,7 @@ export default function Header() {
         <button
           id="mobile-menu-toggle"
           type="button"
-          className="flex size-11 shrink-0 items-center justify-center rounded-lg lg:hidden"
+          className="flex size-11 shrink-0 items-center justify-center rounded-lg xl:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
@@ -223,7 +227,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Full-width mobile menu */}
+      {/* Full-width mobile navigation */}
       {menuOpen && (
         <nav
           id="mobile-navigation"
@@ -234,11 +238,24 @@ export default function Header() {
               document.getElementById("mobile-menu-toggle")?.focus();
             }
           }}
-          className="absolute inset-x-0 top-full max-h-[calc(100dvh-78px)] w-full overflow-y-auto overscroll-contain border-t border-white/10 bg-[#0c2337] px-4 pb-6 pt-3 text-white shadow-xl lg:hidden"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-78px)] w-full overflow-y-auto overscroll-contain border-t border-white/10 bg-[#0c2337] px-4 pb-6 pt-3 text-white shadow-xl xl:hidden"
         >
+          <Link
+            to="/"
+            onClick={closeMenus}
+            aria-current={pathname === "/" && !hash ? "page" : undefined}
+            className={`block rounded-lg px-3 py-3 text-sm font-medium ${
+              pathname === "/" && !hash
+                ? "bg-white/10 text-[#79c2ff]"
+                : "hover:bg-white/5"
+            }`}
+          >
+            Home
+          </Link>
+
           <div className="py-2">
-            <p className="py-2 text-sm font-bold text-white/60">
-              Services
+            <p className="px-3 py-2 text-sm font-bold text-white/60">
+              Our Services
             </p>
 
             {services.map((service) => (
@@ -254,25 +271,21 @@ export default function Header() {
           </div>
 
           <div className="border-t border-white/10 pt-2">
-            {navigation.map((item) => {
-              const active = pathname === item.to;
-
-              return (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  onClick={closeMenus}
-                  aria-current={active ? "page" : undefined}
-                  className={`block w-full rounded-lg px-3 py-3 text-sm font-medium transition ${
-                    active
-                      ? "bg-white/10 text-[#79c2ff]"
-                      : "text-white hover:bg-white/5"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {navigation.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={closeMenus}
+                aria-current={pathname === to ? "page" : undefined}
+                className={`block w-full rounded-lg px-3 py-3 text-sm font-medium transition ${
+                  pathname === to
+                    ? "bg-white/10 text-[#79c2ff]"
+                    : "text-white hover:bg-white/5"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
 
           <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4">

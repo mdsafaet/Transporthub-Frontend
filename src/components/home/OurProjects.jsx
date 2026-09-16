@@ -1,34 +1,36 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "../common/Reveal";
 import SectionKicker from "../common/SectionKicker";
 
+// Sample project content — replace with your completed projects.
 const projects = [
   {
-    title: "Connecting markets by sea",
-    category: "Ocean Freight",
+    title: "Connecting businesses by sea",
+    category: "Container Shipping",
     description:
-      "Coordinated container transport from collection through port handling and final delivery.",
+      "Container shipment coordination covering booking, cargo preparation, and ocean transport between ports.",
     image:
       "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1000&q=85",
     alt: "Container ship carrying cargo",
   },
   {
-    title: "Keeping business moving",
-    category: "Land Transport",
+    title: "Coordinating the port journey",
+    category: "Port-to-Port Services",
     description:
-      "A coordinated road freight operation connecting distribution facilities with customer locations.",
+      "Planning port connections and shipment handovers from the origin terminal to the destination port.",
     image:
-      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1000&q=85",
-    alt: "Freight truck used for road transport",
+      "https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=1000&q=85",
+    alt: "Shipping containers at a cargo port",
   },
   {
-    title: "Space for smarter operations",
-    category: "Warehousing",
+    title: "Moving beyond the port",
+    category: "Door-to-Door Transport",
     description:
-      "Organized storage and cargo handling to support a connected distribution operation.",
+      "Connecting ocean transport with inland collection and delivery for a coordinated container journey.",
     image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1000&q=85",
-    alt: "Storage racks inside a warehouse",
+      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1000&q=85",
+    alt: "Freight truck providing inland transport",
   },
 ];
 
@@ -49,15 +51,17 @@ export default function OurProjects() {
                 id="projects-heading"
                 className="max-w-[700px] text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
               >
-                A look at our{" "}
-                <span className="text-[#1684e8]">completed projects.</span>
+                Connecting ports.
+                <br />
+                <span className="text-[#1684e8]">
+                  Delivering possibilities.
+                </span>
               </h2>
             </div>
 
             <p className="max-w-[340px] text-sm leading-6 text-slate-500">
-              Explore the journeys, operations, and partnerships behind
-              our work. Every project starts with a challenge and a
-              plan to move forward.
+              Explore the planning and coordination behind container
+              journeys—from port-to-port shipping to inland delivery.
             </p>
           </div>
         </Reveal>
@@ -79,7 +83,10 @@ export default function OurProjects() {
                     className="project-image"
                   />
 
-                  <div className="project-image-overlay" />
+                  <div
+                    className="project-image-overlay"
+                    aria-hidden="true"
+                  />
 
                   <span className="project-category">
                     {project.category}
@@ -101,7 +108,7 @@ export default function OurProjects() {
 
                   <div className="project-card-footer">
                     <span className="text-xs text-slate-500">
-                      TransportNet Logistics
+                      TransportNet Shipping
                     </span>
 
                     <span
@@ -118,13 +125,14 @@ export default function OurProjects() {
         <Reveal>
           <div className="projects-bottom">
             <p className="text-sm leading-6 text-slate-500">
-              Have a similar project in mind? Let’s plan your next move.
+              Planning a container shipment? Let’s discuss your route
+              and requirements.
             </p>
 
-            <a href="/request-quote" className="projects-button">
-              Discuss your project
+            <Link to="/request-quote" className="projects-button">
+              Discuss your shipment
               <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>

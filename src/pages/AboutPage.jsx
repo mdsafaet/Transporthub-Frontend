@@ -6,55 +6,58 @@ import {
   ShieldCheck,
   Users,
   Ship,
-  Plane,
   Truck,
-  Warehouse,
+  Snowflake,
+  Package,
 } from "lucide-react";
 import Reveal from "../components/common/Reveal";
 import SectionKicker from "../components/common/SectionKicker";
-
 
 const values = [
   {
     title: "People first",
     description:
-      "We listen to your priorities and build working relationships around clear communication.",
+      "Understand your shipping priorities and provide clear guidance from booking to delivery.",
     Icon: Users,
   },
   {
-    title: "Care in the details",
+    title: "Care in every detail",
     description:
-      "From planning to handover, we focus on the details that keep your shipment moving.",
+      "Coordinate container requirements, documentation, and handling around the needs of your cargo.",
     Icon: ShieldCheck,
   },
   {
-    title: "A connected approach",
+    title: "Connected planning",
     description:
-      "We bring routes, services, and people together around your business needs.",
+      "Bring sailing schedules, port connections, and inland transport together in one shipping plan.",
     Icon: Globe2,
   },
 ];
 
 const services = [
   {
-    title: "Ocean freight",
-    description: "Coordinated solutions for international cargo.",
+    title: "Container shipping",
+    description:
+      "Scheduled ocean transport connecting origin and destination ports.",
     Icon: Ship,
   },
   {
-    title: "Air freight",
-    description: "Transport planning around your shipping priorities.",
-    Icon: Plane,
-  },
-  {
-    title: "Land transport",
-    description: "Road connections for collection and delivery.",
+    title: "Inland transport",
+    description:
+      "Collection and delivery arrangements connecting your business with the port.",
     Icon: Truck,
   },
   {
-    title: "Warehousing",
-    description: "Storage and handling for your next stage of growth.",
-    Icon: Warehouse,
+    title: "Reefer containers",
+    description:
+      "Transport planning for cargo with temperature-control requirements.",
+    Icon: Snowflake,
+  },
+  {
+    title: "Special cargo",
+    description:
+      "Equipment and handling arrangements for cargo with specific shipping needs.",
+    Icon: Package,
   },
 ];
 
@@ -78,17 +81,18 @@ export default function AboutPage() {
                 id="abt-heading"
                 className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
               >
-                Moving cargo.
+                Connecting ports.
                 <br />
                 <span className="text-[#1684e8]">
-                  Connecting possibilities.
+                  Moving businesses.
                 </span>
               </h1>
 
               <p className="text-sm leading-6 text-slate-500">
-                Behind every shipment is a business moving forward.
-                We bring a personal approach to logistics, helping you
-                connect your plans with the people and places that matter.
+                Container shipping connects businesses with their
+                markets. We help you plan the journey with scheduled
+                ocean services, coordinated inland transport, and
+                personal support.
               </p>
             </div>
           </Reveal>
@@ -97,23 +101,23 @@ export default function AboutPage() {
             <div className="abt-hero-image">
               <img
                 src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1800&q=85"
-                alt="Container ship transporting cargo"
+                alt="Container ship transporting cargo by sea"
                 width="1800"
                 height="900"
               />
 
-              <div className="abt-image-overlay" />
+              <div className="abt-image-overlay" aria-hidden="true" />
 
               <span className="abt-image-tag">
-                <Globe2 size={16} aria-hidden="true" />
-                TransportNet Logistics
+                <Ship size={16} aria-hidden="true" />
+                TransportNet Shipping
               </span>
 
               <div className="abt-image-caption">
                 <p className="text-2xl font-semibold tracking-tight sm:text-4xl">
-                  Every journey starts
+                  Every container carries
                   <br />
-                  with a connection.
+                  a business forward.
                 </p>
 
                 <span className="abt-image-caption-icon">
@@ -135,7 +139,7 @@ export default function AboutPage() {
               id="abt-story-heading"
               className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
             >
-              Global thinking.
+              Clear planning.
               <br />
               <span className="text-[#1684e8]">Personal attention.</span>
             </h2>
@@ -144,26 +148,29 @@ export default function AboutPage() {
           <Reveal className="delay-2">
             <div className="abt-story-copy">
               <p className="text-sm leading-6 text-slate-500">
-                Logistics brings together many moving parts. Our role
-                is to help you understand the options, coordinate the
-                details, and move forward with a clear plan.
+                A container journey involves more than the ocean
+                crossing. Sailing selection, shipping documents, port
+                handovers, and inland connections all need to work
+                together.
               </p>
 
               <p className="mt-5 text-sm leading-6 text-slate-500">
-                Whether you’re arranging an individual shipment or
-                planning a wider distribution operation, we start by
-                understanding your cargo, timeline, and priorities.
+                We start with your cargo, origin, destination, and
+                preferred timeline. From there, our team helps you
+                understand the available options and coordinate the
+                next steps.
               </p>
 
               <div className="abt-mission">
                 <span className="abt-mission-line" aria-hidden="true" />
+
                 <div>
                   <h3 className="text-xl font-semibold tracking-tight">
                     Our purpose
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-slate-500">
-                    Make logistics easier to navigate, so you can
-                    focus on what comes next for your business.
+                    Make container shipping easier to navigate, so
+                    you can focus on the opportunities ahead.
                   </p>
                 </div>
               </div>
@@ -182,17 +189,20 @@ export default function AboutPage() {
             <div className="abt-section-heading">
               <div>
                 <SectionKicker>What guides us</SectionKicker>
+
                 <h2
                   id="abt-values-heading"
                   className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
                 >
-                  Built on <span className="text-[#1684e8]">trust.</span>
+                  Built on{" "}
+                  <span className="text-[#1684e8]">understanding.</span>
                 </h2>
               </div>
 
               <p className="text-sm leading-6 text-slate-500">
-                A practical set of principles shapes how we work
-                with you and look after your shipment.
+                Your shipment has its own requirements. Our approach
+                starts with listening and carries through to the
+                details of the journey.
               </p>
             </div>
           </Reveal>
@@ -209,6 +219,7 @@ export default function AboutPage() {
                         aria-hidden="true"
                       />
                     </span>
+
                     <span className="abt-number" aria-hidden="true">
                       0{index + 1}
                     </span>
@@ -241,14 +252,15 @@ export default function AboutPage() {
               id="abt-services-heading"
               className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
             >
-              One partner.
+              Across the ocean.
               <br />
-              <span className="text-[#1684e8]">More ways forward.</span>
+              <span className="text-[#1684e8]">Beyond the port.</span>
             </h2>
 
             <p className="mt-6 max-w-[460px] text-sm leading-6 text-slate-500">
-              Connected services to support your cargo from collection
-              through storage, transport, and delivery.
+              Explore container shipping and supporting transport
+              services, from port-to-port movements to collection and
+              delivery arrangements.
             </p>
 
             <Link to="/#services" className="abt-text-link">
@@ -285,24 +297,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="abt-cta-section" aria-labelledby="abt-cta-heading">
+      {/* Quote */}
+      <section
+        className="abt-cta-section"
+        aria-labelledby="abt-cta-heading"
+      >
         <div className="abt-container">
           <Reveal>
             <div className="abt-cta">
               <div>
-                <p className="abt-cta-eyebrow">Let’s move forward</p>
+                <p className="abt-cta-eyebrow">Plan your next sailing</p>
 
                 <h2
                   id="abt-cta-heading"
                   className="text-3xl font-semibold tracking-tight sm:text-4xl"
                 >
-                  Your next journey starts with a conversation.
+                  Where does your cargo need to go?
                 </h2>
 
                 <p className="mt-4 text-sm leading-6 text-white/75">
-                  Tell us what you’re planning. We’ll help you explore
-                  the next steps.
+                  Share your container requirements and destination.
+                  We’ll help you explore the shipping options.
                 </p>
               </div>
 

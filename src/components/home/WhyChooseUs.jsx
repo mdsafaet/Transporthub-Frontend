@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import {
-  Globe2,
+  Ship,
   ShieldCheck,
   Radar,
   Headphones,
@@ -11,31 +12,31 @@ import SectionKicker from "../common/SectionKicker";
 
 const features = [
   {
-    title: "Connected worldwide",
+    title: "Scheduled connections",
     description:
-      "Find the right route for your cargo with coordinated ocean, air, and road transport.",
-    label: "Global connections",
-    Icon: Globe2,
+      "Plan your container shipments around sailing schedules and port connections that suit your business.",
+    label: "Routes & schedules",
+    Icon: Ship,
   },
   {
-    title: "Handled with care",
+    title: "Care for your cargo",
     description:
-      "Thoughtful planning and careful coordination throughout your shipment’s journey.",
-    label: "Cargo care",
+      "Coordinate container requirements and handling arrangements from collection through delivery.",
+    label: "Container handling",
     Icon: ShieldCheck,
   },
   {
-    title: "Clarity at every step",
+    title: "Clarity at every stage",
     description:
-      "Clear communication helps you stay informed and plan your next move confidently.",
-    label: "Shipment visibility",
+      "Follow available shipment updates and stay informed as your container moves toward its destination.",
+    label: "Container tracking",
     Icon: Radar,
   },
   {
-    title: "People on your side",
+    title: "Support for your journey",
     description:
-      "Work with a team that understands your priorities and helps you navigate the details.",
-    label: "Personal support",
+      "Get guidance on bookings, shipping documents, and the next steps for your container shipment.",
+    label: "Shipping support",
     Icon: Headphones,
   },
 ];
@@ -45,7 +46,7 @@ export default function WhyChooseUs() {
     <section
       id="why-choose-us"
       className="why-choice"
-      aria-labelledby="why-choice-heading"
+      aria-labelledby="why-choice-title"
     >
       <div className="why-choice-container">
         <Reveal>
@@ -53,67 +54,60 @@ export default function WhyChooseUs() {
             <SectionKicker>Why choose TransportNet</SectionKicker>
 
             <h2
-              id="why-choice-heading"
+              id="why-choice-title"
               className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
             >
-              Built for your business.
+              Connecting your cargo.
               <br />
               <span className="text-[#1684e8]">
-                Ready for your next move.
+                Supporting your business.
               </span>
             </h2>
 
             <p className="why-choice-intro text-sm leading-6 text-slate-500">
-              Logistics is more than moving cargo. It’s understanding
-              what matters to you—and taking care of the journey.
+              From choosing a sailing to arranging delivery, we help
+              you navigate container shipping with clear planning and
+              personal support.
             </p>
           </div>
         </Reveal>
 
         <div className="why-choice-grid">
-          {features.map(
-            ({ title, description, label, Icon }, index) => (
-              <Reveal
-                key={title}
-                className={`why-choice-item why-choice-delay-${index + 1}`}
-              >
-                <article className="why-choice-card">
-                  <div className="why-choice-card-top">
-                    <span className="why-choice-icon">
-                      <Icon
-                        size={25}
-                        strokeWidth={1.6}
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    <span
-                      className="why-choice-number"
-                      aria-hidden="true"
-                    >
-                      0{index + 1}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-semibold tracking-tight">
-                    {title}
-                  </h3>
-
-                  <p className="why-choice-description text-sm leading-6">
-                    {description}
-                  </p>
-
-                  <div className="why-choice-card-bottom">
-                    <span>{label}</span>
-                    <span
-                      className="why-choice-line"
+          {features.map(({ title, description, label, Icon }, index) => (
+            <Reveal
+              key={title}
+              className={`why-choice-item why-choice-delay-${index + 1}`}
+            >
+              <article className="why-choice-card">
+                <div className="why-choice-card-top">
+                  <span className="why-choice-icon">
+                    <Icon
+                      size={25}
+                      strokeWidth={1.6}
                       aria-hidden="true"
                     />
-                  </div>
-                </article>
-              </Reveal>
-            ),
-          )}
+                  </span>
+
+                  <span className="why-choice-number" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-semibold tracking-tight">
+                  {title}
+                </h3>
+
+                <p className="why-choice-description text-sm leading-6">
+                  {description}
+                </p>
+
+                <div className="why-choice-card-bottom">
+                  <span>{label}</span>
+                  <span className="why-choice-line" aria-hidden="true" />
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal>
@@ -125,20 +119,20 @@ export default function WhyChooseUs() {
 
               <div>
                 <h3 className="text-xl font-semibold tracking-tight">
-                  Let’s make your next shipment simpler.
+                  Let’s plan your next container shipment.
                 </h3>
 
                 <p className="mt-2 text-sm leading-6">
-                  Tell us where you’re going. We’ll help you plan the
-                  journey.
+                  Share your cargo details, origin, and destination.
+                  We’ll help you explore the options.
                 </p>
               </div>
             </div>
 
-            <a href="/request-quote" className="why-choice-button">
+            <Link to="/request-quote" className="why-choice-button">
               Request a quote
               <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>
