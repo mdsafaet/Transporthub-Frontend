@@ -23,19 +23,21 @@ export default function Footer() {
       <div className="mx-auto max-w-[1380px]">
         <div className="grid gap-12 border-b border-white/10 pb-14 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
-            <Link
-              to="/"
-              className="flex items-center gap-3"
-              aria-label="TransportNet home"
-            >
-              <span className="logo-mark" aria-hidden="true">
-                <span />
-              </span>
+<Link
+  to="/"
+  className="flex items-center gap-3"
+  aria-label="TransportNet home"
+>
+  <img
+    src="/images/Coastshipp.jpeg"
+    alt=""
+    className="h-16 w-16 object-contain"
+  />
 
-              <span className="text-[19px] font-semibold tracking-[-0.04em]">
-                Transport<span className="text-[#4fa8ff]">Net</span>
-              </span>
-            </Link>
+  <span className="text-[19px] font-semibold tracking-[-0.04em]">
+    Coast <span className="text-[#4f78ff]">Shipping</span>
+  </span>
+</Link>
 
             <p className="mt-5 max-w-[280px] text-sm leading-6 text-white/45">
               Connecting ports and businesses through scheduled
@@ -103,7 +105,7 @@ export default function Footer() {
 
         <div className="flex flex-col justify-between gap-3 pt-6 text-xs text-white/35 sm:flex-row">
           <span>
-            © {new Date().getFullYear()} TransportNet. All rights reserved.
+            © {new Date().getFullYear()} Coast Shipping Line Ltd. All rights reserved.
           </span>
 
           <p className="text-xs text-slate-400">

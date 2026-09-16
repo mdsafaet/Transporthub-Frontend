@@ -89,20 +89,22 @@ export default function Header() {
     >
       <div className="mx-auto flex h-[78px] w-full max-w-[1380px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
         {/* Logo */}
-        <Link
-          to="/"
-          onClick={closeMenus}
-          className="flex shrink-0 items-center gap-3"
-          aria-label="TransportNet home"
-        >
-          <span className="logo-mark" aria-hidden="true">
-            <span />
-          </span>
+<Link
+  to="/"
+  onClick={closeMenus}
+  className="flex shrink-0 items-center gap-3"
+  aria-label="Coast Shipping home"
+>
+  <img
+    src="/images/Coastshipp.jpeg"
+    alt=""
+    className="h-16 w-16 "
+  />
 
-          <span className="text-[19px] font-semibold tracking-[-0.04em]">
-            Transport<span className="text-[#4fa8ff]">Net</span>
-          </span>
-        </Link>
+  <span className="text-[20px] font-semibold tracking-[-0.04em]">
+    Coast <span className="text-[#4f78ff]">Shipping</span>
+  </span>
+</Link>
 
         {/* Desktop navigation */}
         <nav

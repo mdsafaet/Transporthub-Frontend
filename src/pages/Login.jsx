@@ -42,12 +42,14 @@ export default function Login({ onLogin }) {
           className="inline-flex items-center gap-3 self-start"
           aria-label="TransportNet home"
         >
-          <span className="logo-mark text-[#1684e8]">
-            <span />
-          </span>
+  <img
+    src="/images/Coastshipp.jpeg"
+    alt=""
+    className="h-16 w-16 "
+  />
 
           <span className="text-xl font-semibold tracking-tight text-[#071525]">
-            Transport<span className="text-[#1684e8]">Net</span>
+            Coast<span className="text-[#1684e8]"> Shipping</span>
           </span>
         </Link>
 

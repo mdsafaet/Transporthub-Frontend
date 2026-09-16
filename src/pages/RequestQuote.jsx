@@ -83,13 +83,21 @@ export default function RequestQuote() {
     <main className="rq-page">
       <header className="rq-header">
         <div className="rq-container rq-navigation">
-          <Link
-            to="/"
-            className="rq-logo"
-            aria-label="TransportNet home"
-          >
-            Transport<span>Net</span>
-          </Link>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-3 self-start"
+          aria-label="TransportNet home"
+        >
+  <img
+    src="/images/Coastshipp.jpeg"
+    alt=""
+    className="h-16 w-16 "
+  />
+
+          <span className="text-xl font-semibold tracking-tight text-[#071525]">
+            Coast<span className="text-[#1684e8]"> Shipping</span>
+          </span>
+        </Link>
 
           <Link to="/" className="rq-back">
             <ArrowLeft size={16} aria-hidden="true" />
@@ -370,7 +378,7 @@ export default function RequestQuote() {
       <footer className="rq-footer">
         <div className="rq-container">
           <p>
-            © {new Date().getFullYear()} TransportNet. All rights
+            © {new Date().getFullYear()} Coast Shipping. All rights
             reserved.
           </p>
           <a href="/#contact">Contact our team</a>
