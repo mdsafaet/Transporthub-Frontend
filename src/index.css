@@ -3,15 +3,18 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  color-scheme: dark;
-  --background: #071525;
-  --foreground: #fff;
-  --card: #0c2337;
-  --card-foreground: #fff;
-  --primary: #168af0;
-  --primary-foreground: #fff;
-  --border: rgba(255, 255, 255, 0.12);
-  --radius: 1rem;
+  color-scheme: light;
+
+  --color-primary: #37328b;
+  --color-primary-dark: #242161;
+  --color-secondary: #93378d;
+  --color-orange: #cc7b38;
+  --color-green: #a8c94a;
+
+  --color-heading: #171634;
+  --color-body: #596174;
+  --color-background: #f8f8fc;
+  --color-surface: #ffffff;
 }
 @theme inline {
   --color-background: var(--background);
