@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
-import {
-  ArrowUpRight,
-  ChevronDown,
-  Menu,
-  X,
-} from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
-const services = [
-  "Container Shipping",
-  "Port-to-Port Services",
-  "Door-to-Door Transport",
-  "Reefer Containers",
-  "Special Cargo",
-];
-
 const navigation = [
+  { label: "Home", to: "/" },
+  { label: "Services", to: "/#services" },
   { label: "Routes & Schedules", to: "/schedules" },
   { label: "Container Tracking", to: "/tracking" },
   { label: "About", to: "/about" },
@@ -24,238 +13,39 @@ const navigation = [
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-
   const { pathname, hash } = useLocation();
 
-  const solidHeader =
-    scrolled || pathname !== "/" || menuOpen;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const desktopView = window.matchMedia(
-      "(min-width: 1280px)",
-    );
-
-    const handleScreenChange = () => {
-      setMenuOpen(false);
-      setServicesOpen(false);
-    };
-
-    desktopView.addEventListener("change", handleScreenChange);
-
-    return () => {
-      desktopView.removeEventListener(
-        "change",
-        handleScreenChange,
-      );
-    };
-  }, []);
-
-  useEffect(() => {
-    setMenuOpen(false);
-    setServicesOpen(false);
-
-    const frame = window.requestAnimationFrame(() => {
-      if (hash) {
-        const section = document.getElementById(
-          decodeURIComponent(hash.slice(1)),
-        );
-
-        const reducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        section?.scrollIntoView({
-          behavior: reducedMotion ? "auto" : "smooth",
-          block: "start",
-        });
-      } else {
-        window.scrollTo({
-          top: 0,
-          behavior: "auto",
-        });
-      }
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-    };
-  }, [pathname, hash]);
-
-  const closeMenus = () => {
-    setMenuOpen(false);
-    setServicesOpen(false);
-  };
-
-  const desktopLinkClass = (active = false) => {
-    if (active) {
-      return "text-[#93378d]";
-    }
-
-    return solidHeader
-      ? "text-[#242161] hover:text-[#93378d]"
-      : "text-white/90 hover:text-white";
-  };
-
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-300 ${
-        solidHeader
-          ? "bg-white/95 shadow-lg shadow-[#242161]/10 backdrop-blur-xl"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-[78px] w-full max-w-[1380px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/95 shadow-lg shadow-blue-500/10 backdrop-blur-md">
+      {/* Full width container with edge padding */}
+      <div className="flex h-24 w-full items-center justify-between px-6 md:px-12 lg:px-16">
+        {/* Brand Logo & Name */}
         <Link
           to="/"
-          onClick={closeMenus}
-          className="flex shrink-0 items-center gap-2 sm:gap-3"
+          className="flex items-center gap-3.5 focus:outline-none"
           aria-label="Coast Shipping home"
         >
           <img
             src="/images/Coastshipp.jpeg"
             alt="Coast Shipping"
-            width="70"
-            height="56"
-            className="h-14 w-[70px] rounded-md bg-white object-contain"
+            className="h-14 w-16 rounded-lg object-contain bg-white"
           />
-
-          <span
-            className={`hidden text-[18px] font-semibold tracking-[-0.04em] sm:block ${
-              solidHeader ? "text-[#302d80]" : "text-white"
-            }`}
-          >
-            Coast{" "}
-            <span className="text-[#93378d]">
-              Shipping
-            </span>
+          <span className="text-xl font-semibold tracking-tight text-slate-900">
+            Coast <span className="text-[#8b3f80]">Shipping</span>
           </span>
         </Link>
 
-        <nav
-          aria-label="Main navigation"
-          className="hidden items-center gap-5 text-[13px] font-medium xl:flex"
-        >
-          <Link
-            to="/"
-            onClick={closeMenus}
-            aria-current={
-              pathname === "/" && !hash ? "page" : undefined
-            }
-            className={`whitespace-nowrap transition-colors ${
-              desktopLinkClass(pathname === "/" && !hash)
-            }`}
-          >
-            Home
-          </Link>
-
-          <div
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-            onBlur={(event) => {
-              if (
-                !event.currentTarget.contains(
-                  event.relatedTarget,
-                )
-              ) {
-                setServicesOpen(false);
-              }
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") {
-                setServicesOpen(false);
-
-                event.currentTarget
-                  .querySelector("button")
-                  ?.focus();
-              }
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => {
-                setServicesOpen((open) => !open);
-              }}
-              aria-expanded={servicesOpen}
-              aria-controls="desktop-services"
-              className={`flex items-center gap-1 whitespace-nowrap py-2 transition-colors ${
-                desktopLinkClass(
-                  pathname === "/" && hash === "#services",
-                )
-              }`}
-            >
-              Our Services
-
-              <ChevronDown
-                aria-hidden="true"
-                className={`size-3.5 transition-transform duration-200 ${
-                  servicesOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {servicesOpen && (
-              <div
-                id="desktop-services"
-                className="absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3"
-              >
-                <div className="overflow-hidden rounded-2xl border border-[#37328b]/10 bg-white p-2 text-[#242161] shadow-2xl shadow-[#242161]/15">
-                  {services.map((service, index) => (
-                    <Link
-                      key={service}
-                      to="/#services"
-                      onClick={closeMenus}
-                      className="group flex items-center gap-3 rounded-xl px-3 py-3 text-xs font-semibold transition hover:bg-[#f4f2fa] hover:text-[#93378d]"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className={`size-2 rounded-full ${
-                          index % 3 === 0
-                            ? "bg-[#37328b]"
-                            : index % 3 === 1
-                              ? "bg-[#cc7b38]"
-                              : "bg-[#a8c94a]"
-                        }`}
-                      />
-
-                      {service}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
+        {/* Desktop Navigation */}
+        <nav aria-label="Main Navigation" className="hidden items-center gap-10 lg:flex">
           {navigation.map(({ label, to }) => {
-            const active = pathname === to;
-
+            const isActive = pathname === to || (to.includes("#") && hash === "#services");
             return (
               <Link
                 key={to}
                 to={to}
-                onClick={closeMenus}
-                aria-current={active ? "page" : undefined}
-                className={`whitespace-nowrap transition-colors ${
-                  desktopLinkClass(active)
+                className={`text-[15px] font-medium transition-colors hover:text-[#8b3f80] ${
+                  isActive ? "text-[#8b3f80]" : "text-slate-700"
                 }`}
               >
                 {label}
@@ -264,186 +54,68 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-5 xl:flex">
+        {/* Desktop Actions */}
+        <div className="hidden items-center gap-6 lg:flex">
           <Link
             to="/login"
-            onClick={closeMenus}
-            className={`text-[13px] font-semibold transition-colors ${
-              pathname === "/login"
-                ? "text-[#93378d]"
-                : solidHeader
-                  ? "text-[#242161] hover:text-[#93378d]"
-                  : "text-white/90 hover:text-white"
-            }`}
+            className="text-[15px] font-medium text-slate-700 transition-colors hover:text-[#8b3f80]"
           >
             Login
           </Link>
 
           <Link
             to="/request-quote"
-            onClick={closeMenus}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[#37328b] px-5 py-3 text-[13px] font-bold text-white shadow-lg shadow-[#37328b]/20 transition hover:bg-[#93378d] focus:outline-none focus:ring-2 focus:ring-[#93378d] focus:ring-offset-2"
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#8b3f80] px-6 py-3 text-[15px] font-semibold text-white shadow-lg shadow-blue-500/25 transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
           >
             Request a quote
-
-            <ArrowUpRight
-              aria-hidden="true"
-              className="size-4"
-            />
+            <ArrowUpRight className="size-4.5" aria-hidden="true" />
           </Link>
         </div>
 
+        {/* Mobile Menu Toggle */}
         <button
-          id="mobile-menu-toggle"
           type="button"
-          onClick={() => {
-            setMenuOpen((open) => !open);
-            setServicesOpen(false);
-          }}
-          aria-label={
-            menuOpen ? "Close navigation" : "Open navigation"
-          }
+          onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          className={`flex size-11 shrink-0 items-center justify-center rounded-xl transition xl:hidden ${
-            solidHeader
-              ? "text-[#302d80] hover:bg-[#37328b]/10"
-              : "text-white hover:bg-white/10"
-          }`}
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          className="flex size-11 items-center justify-center rounded-lg text-slate-900 transition hover:bg-slate-100 lg:hidden"
         >
-          {menuOpen ? (
-            <X aria-hidden="true" className="size-6" />
-          ) : (
-            <Menu aria-hidden="true" className="size-6" />
-          )}
+          {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
         </button>
       </div>
 
+      {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <nav
-          id="mobile-navigation"
-          aria-label="Mobile navigation"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              closeMenus();
-
-              document
-                .getElementById("mobile-menu-toggle")
-                ?.focus();
-            }
-          }}
-          className="absolute inset-x-0 top-full max-h-[calc(100dvh-78px)] w-full overflow-y-auto overscroll-contain border-t border-white/10 bg-[#242161] px-4 pb-6 pt-3 text-white shadow-2xl xl:hidden"
-        >
-          <Link
-            to="/"
-            onClick={closeMenus}
-            aria-current={
-              pathname === "/" && !hash ? "page" : undefined
-            }
-            className={`block rounded-xl px-4 py-3 text-sm font-semibold transition ${
-              pathname === "/" && !hash
-                ? "bg-white/10 text-[#c9dc71]"
-                : "text-white/90 hover:bg-white/10 hover:text-white"
-            }`}
-          >
-            Home
-          </Link>
-
-          <div className="py-2">
-            <button
-              type="button"
-              onClick={() => {
-                setServicesOpen((open) => !open);
-              }}
-              aria-expanded={servicesOpen}
-              aria-controls="mobile-services"
-              className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold text-white/90 transition hover:bg-white/10"
-            >
-              Our Services
-
-              <ChevronDown
-                aria-hidden="true"
-                className={`size-4 transition-transform duration-200 ${
-                  servicesOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {servicesOpen && (
-              <div
-                id="mobile-services"
-                className="ml-4 border-l border-white/15 pl-3"
+        <div className="absolute inset-x-0 top-full border-t border-slate-100 bg-white px-8 py-8 shadow-2xl lg:hidden">
+          <nav aria-label="Mobile Navigation" className="flex flex-col gap-5">
+            {navigation.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => setMenuOpen(false)}
+                className="text-lg font-medium text-slate-800 transition hover:text-[#8b3f80]"
               >
-                {services.map((service, index) => (
-                  <Link
-                    key={service}
-                    to="/#services"
-                    onClick={closeMenus}
-                    className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`size-2 rounded-full ${
-                        index % 3 === 0
-                          ? "bg-[#a8c94a]"
-                          : index % 3 === 1
-                            ? "bg-[#cc7b38]"
-                            : "bg-[#c451a5]"
-                      }`}
-                    />
-
-                    {service}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="border-t border-white/10 pt-2">
-            {navigation.map(({ label, to }) => {
-              const active = pathname === to;
-
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  onClick={closeMenus}
-                  aria-current={active ? "page" : undefined}
-                  className={`block w-full rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                    active
-                      ? "bg-white/10 text-[#c9dc71]"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4">
+                {label}
+              </Link>
+            ))}
+            <div className="my-2 h-px bg-slate-100" />
             <Link
               to="/login"
-              onClick={closeMenus}
-              className="flex min-h-12 w-full items-center justify-center rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold transition hover:bg-white/10"
+              onClick={() => setMenuOpen(false)}
+              className="text-lg font-medium text-slate-800 transition hover:text-[#8b3f80]"
             >
               Login
             </Link>
-
             <Link
               to="/request-quote"
-              onClick={closeMenus}
-              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#93378d] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#a8c94a] hover:text-[#242161]"
+              onClick={() => setMenuOpen(false)}
+              className="mt-3 flex items-center justify-center gap-2.5 rounded-full bg-[#8b3f80] px-6 py-3.5 text-center text-base font-semibold text-white shadow-lg transition hover:bg-[#c7854b]"
             >
               Request a quote
-
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-4"
-              />
+              <ArrowUpRight className="size-5" />
             </Link>
-          </div>
-        </nav>
+          </nav>
+        </div>
       )}
     </header>
   );

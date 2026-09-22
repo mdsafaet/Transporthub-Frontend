@@ -1,15 +1,7 @@
+import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const exploreLinks = [
-  { label: "Our Services", to: "/#services" },
-  { label: "Routes & Schedules", to: "/schedules" },
-  { label: "Container Tracking", to: "/tracking" },
-  { label: "About", to: "/about" },
-  { label: "Insights", to: "/insights" },
-  { label: "Contact", to: "/contact" },
-];
-
-const serviceLinks = [
+const services = [
   "Container Shipping",
   "Port-to-Port Services",
   "Door-to-Door Transport",
@@ -17,155 +9,130 @@ const serviceLinks = [
   "Special Cargo",
 ];
 
+const navigation = [
+  { label: "Home", to: "/" },
+  { label: "Routes & Schedules", to: "/schedules" },
+  { label: "Container Tracking", to: "/tracking" },
+  { label: "About Us", to: "/about" },
+  { label: "Insights", to: "/insights" },
+  { label: "Contact", to: "/contact" },
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-[#17152f] px-6 pb-8 pt-16 text-white lg:px-10">
-      <div className="mx-auto max-w-[1380px]">
-        <div className="grid gap-12 border-b border-white/10 pb-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          <div>
-            <Link
-              to="/"
-              aria-label="Coast Shipping home"
-              className="inline-flex items-center gap-3"
-            >
+    <footer className="w-full bg-white text-slate-800 border-t border-slate-200">
+      {/* Main Footer Content */}
+      <div className="mx-auto w-full px-6 py-16 md:px-12 lg:px-16 lg:py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+          
+          {/* Column 1: Brand & Bio (Spans 2 columns on large screens) */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <Link to="/" className="flex items-center gap-3.5 focus:outline-none">
               <img
                 src="/images/Coastshipp.jpeg"
-                alt=""
-                width="70"
-                height="56"
-                className="h-14 w-[70px] rounded-md bg-white object-contain"
+                alt="Coast Shipping"
+                className="h-12 w-14 rounded-lg object-contain bg-slate-100 p-1 border border-slate-200"
               />
-
-              <span className="text-[19px] font-semibold tracking-[-0.04em] text-white">
-                Coast{" "}
-                <span className="text-[#c451a5]">
-                  Shipping
-                </span>
+              <span className="text-xl font-semibold tracking-tight text-slate-900">
+                Coast <span className="text-[#8b3f80]">Shipping</span>
               </span>
             </Link>
 
-            <p className="mt-5 max-w-[310px] text-sm leading-6 text-white/60">
-              Connecting ports and businesses through scheduled
-              container shipping, reliable cargo handling, and
-              coordinated inland transportation.
+            <p className="text-sm text-slate-600 max-w-sm leading-relaxed">
+              Global container shipping and end-to-end logistics solutions connecting ports worldwide with precision, transparency, and reliability.
             </p>
 
-            <div className="mt-6 flex items-center gap-2">
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-10 rounded-full bg-[#37328b]"
-              />
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-7 rounded-full bg-[#cc7b38]"
-              />
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-7 rounded-full bg-[#a8c94a]"
-              />
-              <span
-                aria-hidden="true"
-                className="h-1.5 w-10 rounded-full bg-[#93378d]"
-              />
+            {/* Quick Contact Details */}
+            <div className="flex flex-col gap-3 pt-2 text-sm text-slate-600">
+              <div className="flex items-center gap-3">
+                <MapPin className="size-4 text-[#8b3f80]" />
+                <span>Dhaka, Bangladesh</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="size-4 text-[#8b3f80]" />
+                <span>+880 123 456 789</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="size-4 text-[#8b3f80]" />
+                <span>support@coastshipping.com</span>
+              </div>
             </div>
           </div>
 
-          <nav aria-label="Footer navigation">
-            <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/40">
-              Explore
+          {/* Column 2: Quick Links */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900">
+              Quick Links
+            </h3>
+            <ul className="flex flex-col gap-3">
+              {navigation.map(({ label, to }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-sm text-slate-600 transition-colors hover:text-[#8b3f80]"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Services */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900">
+              Our Services
+            </h3>
+            <ul className="flex flex-col gap-3">
+              {services.map((service) => (
+                <li key={service}>
+                  <Link
+                    to="/#services"
+                    className="text-sm text-slate-600 transition-colors hover:text-[#8b3f80]"
+                  >
+                    {service}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Newsletter / Quote Callout */}
+          <div className="flex flex-col gap-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-900">
+              Get Started
+            </h3>
+            <p className="text-sm text-slate-600">
+              Ready to ship your cargo? Request a fast, transparent quote today.
             </p>
-
-            {exploreLinks.map(({ label, to }) => (
-              <Link
-                key={to}
-                to={to}
-                className="mb-3 block text-sm text-white/65 transition-colors hover:text-[#c9dc71]"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-
-          <nav aria-label="Shipping services">
-            <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/40">
-              Services
-            </p>
-
-            {serviceLinks.map((service) => (
-              <Link
-                key={service}
-                to="/#services"
-                className="mb-3 block text-sm text-white/65 transition-colors hover:text-[#c9dc71]"
-              >
-                {service}
-              </Link>
-            ))}
-          </nav>
-
-          <div>
-            <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/40">
-              Get in touch
-            </p>
-
-            <p className="max-w-[260px] text-sm leading-6 text-white/65">
-              Speak with our shipping team about bookings,
-              schedules, documentation, and container transport.
-            </p>
-
-            <Link
-              to="/contact"
-              className="mt-5 inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#c9dc71] hover:bg-[#c9dc71] hover:text-[#242161]"
-            >
-              Contact our team
-            </Link>
-
             <Link
               to="/request-quote"
-              className="mt-3 block text-sm font-semibold text-[#c451a5] transition hover:text-[#c9dc71]"
+              className="mt-2 inline-flex items-center justify-center gap-2.5 rounded-full bg-[#8b3f80] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80]"
             >
-              Request a shipping quote
+              Request a quote
+              <ArrowUpRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
+
         </div>
+      </div>
 
-        <div className="flex flex-col items-start justify-between gap-4 pt-6 text-xs text-white/40 md:flex-row md:items-center">
-          <span>
-            © {new Date().getFullYear()} Coast Shipping. All
-            rights reserved.
-          </span>
-
-          <p>
-            Developed by{" "}
-            <a
-              href="https://agni.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-[#c451a5] transition hover:text-[#c9dc71] hover:underline"
-            >
-              Agni System Plc
-            </a>
+      {/* Bottom Bar */}
+      <div className="border-t border-slate-200 bg-slate-50">
+        <div className="mx-auto flex w-full flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row md:px-12 lg:px-16">
+          <p className="text-xs text-slate-500">
+            &copy; {new Date().getFullYear()} Coast Shipping. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            <Link
-              to="/privacy"
-              className="transition hover:text-white"
-            >
-              Privacy
+          <div className="flex items-center gap-6 text-xs text-slate-500">
+            <Link to="/privacy" className="transition hover:text-slate-800">
+              Privacy Policy
             </Link>
-
-            <Link
-              to="/terms"
-              className="transition hover:text-white"
-            >
-              Terms
+            <Link to="/terms" className="transition hover:text-slate-800">
+              Terms of Service
             </Link>
-
-            <Link
-              to="/security"
-              className="transition hover:text-white"
-            >
-              Security
+            <Link to="/cookies" className="transition hover:text-slate-800">
+              Cookie Settings
             </Link>
           </div>
         </div>

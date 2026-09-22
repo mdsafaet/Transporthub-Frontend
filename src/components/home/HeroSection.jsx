@@ -1,216 +1,130 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  Pause,
-  Play,
-} from "lucide-react";
+
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 
 const slides = [
   {
-    eyebrow: "CONTAINER SHIPPING",
-    title: "Connecting ports Moving businesses.",
-    description:
-      "Scheduled container shipping and coordinated transport to connect your cargo with its next destination.",
-    image:
-      "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=2200&q=90",
-    tag: "Ocean transport",
-    highlight: "Port to port",
-    detail: "Explore our shipping services",
+    id: 1,
+    // Professional container port & crane shot
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop",
+    titles: [
+      "Global Container Shipping & Logistics",
+      "Reliable Port-to-Port Operations",
+      "End-to-End Supply Chain Management"
+    ],
+    subtitle: "Connecting ports worldwide with precision, reliability, and seamless transport solutions.",
   },
   {
-    eyebrow: "ROUTES & SCHEDULES",
-    title:"Start your shipment journey",
-    description:
-      "Explore sailing schedules and port connections to plan your cargo’s journey around your business needs.",
-    image:
-      "https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=2200&q=90",
-    tag: "Plan your journey",
-    highlight: "Sailing schedules",
-    detail: "Find your next connection",
+    id: 2,
+    // Sleek container ship navigating the open ocean
+    image: "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2000&auto=format&fit=crop",
+    titles: [
+      "Advanced Reefer Container Solutions",
+      "Temperature-Controlled Cargo Delivery",
+      "Protecting Sensitive Cargo Across Oceans"
+    ],
+    subtitle: "Advanced cold-chain solutions designed to keep your perishable cargo fresh and secure.",
   },
   {
-    eyebrow: "CONNECTED TRANSPORT",
-    title: "Beyond the port. Closer to your business.",
-    description:
-      "Connect ocean shipping with inland transport for a coordinated journey from collection to delivery.",
-    image:
-      "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=2200&q=90",
-    tag: "Inland connections",
-    highlight: "Door to door",
-    detail: "Connect every stage of the journey",
+    id: 3,
+    // Modern industrial logistics hub & cargo handling
+    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2000&auto=format&fit=crop",
+    titles: [
+      "Seamless Door-to-Door Solutions",
+      "Direct Warehouse Delivery",
+      "Transparent Global Freight Services"
+    ],
+    subtitle: "From vessel to final destination, we manage your cargo with complete transparency.",
   },
 ];
 
 export default function HeroSection() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  const slide = slides[active];
-
-  useEffect(() => {
-    if (paused) return;
-
-    const motion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-
-    let timer;
-
-    const updateTimer = () => {
-      window.clearInterval(timer);
-
-      if (!motion.matches) {
-        timer = window.setInterval(() => {
-          setActive((current) => (current + 1) % slides.length);
-        }, 6500);
-      }
-    };
-
-    updateTimer();
-    motion.addEventListener("change", updateTimer);
-
-    return () => {
-      window.clearInterval(timer);
-      motion.removeEventListener("change", updateTimer);
-    };
-  }, [paused]);
-
-  const changeSlide = (direction) => {
-    setPaused(true);
-    setActive(
-      (current) => (current + direction + slides.length) % slides.length,
-    );
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <section
-      className="hero relative h-[100svh] min-h-[760px] max-h-[980px] overflow-hidden text-white"
-      aria-label="TransportNet shipping highlights"
-      aria-roledescription="carousel"
-    >
-      {slides.map((item, index) => (
-        <div
-          key={item.title}
-          aria-hidden="true"
-          className={`hero-image absolute inset-0 transition-opacity duration-[1200ms] ${
-            index === active ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ backgroundImage: `url(${item.image})` }}
-        />
-      ))}
-
-      <div className="hero-overlay absolute inset-0" aria-hidden="true" />
-      <div className="hero-grid absolute inset-0" aria-hidden="true" />
-      <div className="particles absolute inset-0" aria-hidden="true" />
-
-      <div className="relative mx-auto flex h-full max-w-[1380px] items-end px-6 pb-36 pt-32 lg:px-10 lg:pb-44">
-        <div className="max-w-[780px]">
-          <div key={slide.title} className="slide-copy">
-            <p className="mb-5 text-[11px] font-bold tracking-[0.28em] text-[#67b7ff]">
-              {slide.eyebrow}
-            </p>
-
-            <h1 className="max-w-[850px] text-[clamp(3.5rem,7vw,7.8rem)] font-semibold leading-[.91] tracking-[-0.075em]">
-              {slide.title}
-            </h1>
-
-            <p className="mt-7 max-w-[510px] text-base leading-7 text-white/70 lg:text-lg">
-              {slide.description}
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                to="/request-quote"
-                className="group rounded-full bg-[#188af0] px-6 py-4 text-sm font-bold transition hover:bg-[#54b2ff]"
+    <section className="relative h-[90vh] min-h-[650px] w-full overflow-hidden bg-black pt-24">
+      <Swiper
+        modules={[Autoplay, EffectFade, Pagination]}
+        effect="fade"
+        autoplay={{ delay: 10000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
+        className="h-full w-full"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={slide.id} className="relative h-full w-full overflow-hidden">
+            {/* Background Image: Alternates coming from Left (-100%) and Right (100%) */}
+            {currentSlide === index && (
+              <motion.div
+                initial={{ x: index % 2 === 0 ? "-100%" : "100%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="absolute inset-0"
               >
-                Request a quote
-                <ArrowRight
-                  aria-hidden="true"
-                  className="ml-5 inline size-4 transition group-hover:translate-x-1"
+                <img
+                  src={slide.image}
+                  alt="Logistics background"
+                  className="h-full w-full object-cover object-center"
                 />
-              </Link>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30 backdrop-blur-[2px]" />
+              </motion.div>
+            )}
 
-              <Link
-                to="/tracking"
-                className="rounded-full border border-white/25 bg-white/5 px-6 py-4 text-sm font-bold backdrop-blur-sm transition hover:bg-white/15"
-              >
-                Track a container
-              </Link>
+            {/* Content Container */}
+            <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-center px-6 md:px-12 lg:px-20">
+              <div className="max-w-3xl">
+                
+                {/* Typewriter Heading */}
+                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1] min-h-[140px] sm:min-h-[160px]">
+                  {currentSlide === index && (
+                    <Typewriter
+                      options={{
+                        strings: slide.titles,
+                        autoStart: true,
+                        loop: true,
+                        deleteSpeed: 40,
+                        typeSpeed: 60,
+                      }}
+                    />
+                  )}
+                </h1>
+
+                {/* Subtitle */}
+                <p className="mt-4 text-lg text-slate-200 sm:text-xl font-normal max-w-2xl leading-relaxed">
+                  {slide.subtitle}
+                </p>
+
+                {/* Action Buttons with Blue Shadow & Theme Colors */}
+                <div className="mt-10 flex flex-wrap items-center gap-5">
+                  <Link
+                    to="/request-quote"
+                    className="inline-flex items-center gap-3 rounded-full bg-[#8b3f80] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
+                  >
+                    Request a quote
+                    <ArrowUpRight className="size-5" aria-hidden="true" />
+                  </Link>
+
+                  <Link
+                    to="/tracking"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20 hover:border-white focus:outline-none"
+                  >
+                    Track Shipment
+                  </Link>
+                </div>
+
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 left-6 right-6 flex items-end justify-between gap-4 lg:left-10 lg:right-10">
-          <div className="hidden items-center gap-3 sm:flex">
-            <span className="text-sm font-semibold">
-              0{active + 1}
-            </span>
-
-            <div className="h-px w-28 bg-white/30" aria-hidden="true">
-              <div
-                className="h-full bg-white transition-all duration-500"
-                style={{
-                  width: `${((active + 1) / slides.length) * 100}%`,
-                }}
-              />
-            </div>
-
-            <span className="text-xs text-white/50">
-              0{slides.length}
-            </span>
-          </div>
-
-          <div className="floating-card hidden w-[235px] rounded-2xl border border-white/15 bg-[#0c2337]/70 p-4 backdrop-blur-xl lg:block">
-            <p className="mb-3 text-[10px] uppercase tracking-widest text-white/60">
-              {slide.tag}
-            </p>
-
-            <p className="text-2xl font-semibold tracking-tight">
-              {slide.highlight}
-            </p>
-
-            <p className="mt-1 text-xs text-white/65">
-              {slide.detail}
-            </p>
-          </div>
-{/* 
-          <div className="flex gap-2">
-            <button
-              type="button"
-              aria-label="Previous slide"
-              onClick={() => changeSlide(-1)}
-              className="rounded-full border border-white/25 p-3 transition hover:bg-white/15"
-            >
-              <ChevronLeft aria-hidden="true" className="size-5" />
-            </button>
-
-            <button
-              type="button"
-              aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-              onClick={() => setPaused((current) => !current)}
-              className="rounded-full border border-white/25 p-3 transition hover:bg-white/15"
-            >
-              {paused ? (
-                <Play aria-hidden="true" className="size-5" />
-              ) : (
-                <Pause aria-hidden="true" className="size-5" />
-              )}
-            </button>
-
-            <button
-              type="button"
-              aria-label="Next slide"
-              onClick={() => changeSlide(1)}
-              className="rounded-full border border-white/25 p-3 transition hover:bg-white/15"
-            >
-              <ChevronRight aria-hidden="true" className="size-5" />
-            </button>
-          </div> */}
-        </div>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 }
