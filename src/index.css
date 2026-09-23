@@ -39,3 +39,28 @@
 footer a {
   transition: color 0.2s ease-in-out;
 }
+
+/* Custom Image Pop-Up Animation from Bottom */
+@keyframes popUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pop-up {
+  animation: popUpFromBottom 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Optional styling to ensure smooth image hover scaling */
+.hover-scale-img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-scale-img:hover {
+  transform: scale(1.03);
+}

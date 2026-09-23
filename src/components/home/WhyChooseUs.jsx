@@ -1,140 +1,105 @@
-import { Link } from "react-router-dom";
-import {
-  Ship,
-  ShieldCheck,
-  Radar,
-  Headphones,
-  ArrowUpRight,
-  ArrowRight,
-} from "lucide-react";
-import Reveal from "../common/Reveal";
-import SectionKicker from "../common/SectionKicker";
+import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
+import { CheckCircle2 } from "lucide-react";
 
 const features = [
-  {
-    title: "Scheduled connections",
-    description:
-      "Plan your container shipments around sailing schedules and port connections that suit your business.",
-    label: "Routes & schedules",
-    Icon: Ship,
-  },
-  {
-    title: "Care for your cargo",
-    description:
-      "Coordinate container requirements and handling arrangements from collection through delivery.",
-    label: "Container handling",
-    Icon: ShieldCheck,
-  },
-  {
-    title: "Clarity at every stage",
-    description:
-      "Follow available shipment updates and stay informed as your container moves toward its destination.",
-    label: "Container tracking",
-    Icon: Radar,
-  },
-  {
-    title: "Support for your journey",
-    description:
-      "Get guidance on bookings, shipping documents, and the next steps for your container shipment.",
-    label: "Shipping support",
-    Icon: Headphones,
-  },
+  "Professionally & Technically Skilled Organization",
+  "Committed to Provide World-Class Solution",
+  "Services delivered more than 700+ in Local & International Clients",
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section
-      id="why-choose-us"
-      className="why-choice"
-      aria-labelledby="why-choice-title"
-    >
-      <div className="why-choice-container">
-        <Reveal>
-          <div className="why-choice-heading">
-            <SectionKicker>Why choose TransportNet</SectionKicker>
-
-            <h2
-              id="why-choice-title"
-              className="text-4xl font-semibold tracking-[-0.06em] sm:text-6xl"
+    <section className="relative w-full bg-white py-16 md:py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+      <div className="mx-auto max-w-[1500px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column: Unique Rounded/Curved Image Layout matching reference */}
+          <div className="lg:col-span-6 flex flex-col gap-6 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="overflow-hidden rounded-[40px] rounded-br-[100px] shadow-lg shadow-blue-500/10 border border-slate-100"
             >
-              Connecting your cargo.
-              <br />
-              <span className="text-[#1684e8]">
-                Supporting your business.
-              </span>
+              <img
+                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1000&auto=format&fit=crop"
+                alt="Professional team meeting"
+                className="w-full h-[240px] sm:h-[300px] object-cover"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+              className="overflow-hidden rounded-[40px] rounded-tl-[100px] shadow-lg shadow-blue-500/10 border border-slate-100 sm:w-4/5 sm:self-end -mt-12 sm:-mt-16 bg-white p-2"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1000&auto=format&fit=crop"
+                alt="Corporate logistics office"
+                className="w-full h-[200px] sm:h-[240px] object-cover rounded-[32px] rounded-tl-[80px]"
+              />
+            </motion.div>
+          </div>
+
+          {/* Right Column: Content & Bullet Points */}
+          <div className="lg:col-span-6 flex flex-col justify-center">
+            
+            {/* Typewriter Header */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 min-h-[50px] sm:min-h-[60px]">
+              <Typewriter
+                options={{
+                  strings: ["WHY COAST SHIPP?"],
+                  autoStart: true,
+                  loop: true,
+                  deleteSpeed: 50,
+                  typeSpeed: 70,
+                }}
+              />
             </h2>
 
-            <p className="why-choice-intro text-sm leading-6 text-slate-500">
-              From choosing a sailing to arranging delivery, we help
-              you navigate container shipping with clear planning and
-              personal support.
+            {/* Description Text */}
+            <p className="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              Coast Shipping is one of the leading specialist logistics and container transport companies. We deliver technology-based solutions to over 700+ companies including corporate clients in Bangladesh and abroad. Coast Shipping is working with a team that is dedicated to your cargo well-being. Our deep expertise, comprehensive services, commitment to personalized advice, and proactive approach give you peace of mind that your supply chain and shipping affairs are in the best possible hands. Whether you're looking for solutions to optimize freight, reduce transit times, or plan for secure global shipping, we are here to guide you every step of the way.
             </p>
-          </div>
-        </Reveal>
 
-        <div className="why-choice-grid">
-          {features.map(({ title, description, label, Icon }, index) => (
-            <Reveal
-              key={title}
-              className={`why-choice-item why-choice-delay-${index + 1}`}
-            >
-              <article className="why-choice-card">
-                <div className="why-choice-card-top">
-                  <span className="why-choice-icon">
-                    <Icon
-                      size={25}
-                      strokeWidth={1.6}
-                      aria-hidden="true"
-                    />
-                  </span>
-
-                  <span className="why-choice-number" aria-hidden="true">
-                    0{index + 1}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-semibold tracking-tight">
-                  {title}
-                </h3>
-
-                <p className="why-choice-description text-sm leading-6">
-                  {description}
-                </p>
-
-                <div className="why-choice-card-bottom">
-                  <span>{label}</span>
-                  <span className="why-choice-line" aria-hidden="true" />
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal>
-          <div className="why-choice-contact">
-            <div className="why-choice-contact-copy">
-              <span className="why-choice-contact-icon">
-                <ArrowRight size={22} aria-hidden="true" />
-              </span>
-
-              <div>
-                <h3 className="text-xl font-semibold tracking-tight">
-                  Let’s plan your next container shipment.
-                </h3>
-
-                <p className="mt-2 text-sm leading-6">
-                  Share your cargo details, origin, and destination.
-                  We’ll help you explore the options.
-                </p>
+            {/* Bottom Grid: Illustration and Feature List with Middle Blue Line */}
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center pt-4">
+              
+              {/* Illustration Card */}
+              <div className="sm:col-span-5 flex items-center justify-center bg-slate-50 rounded-2xl p-6 border border-slate-100 h-full">
+                <img
+                  src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1000&auto=format&fit=crop"
+                  alt="Business strategy illustration"
+                  className="rounded-xl h-36 w-full object-cover shadow-sm"
+                />
               </div>
+
+              {/* Middle Vertical Blue Line Separator (Visible on sm and up) */}
+              <div className="hidden sm:flex sm:col-span-1 justify-center h-4/5">
+                <div className="w-1 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-full shadow-sm shadow-blue-500/50" />
+              </div>
+
+              {/* Bullet Points List */}
+              <ul className="sm:col-span-6 flex flex-col gap-4">
+                {features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 className="size-5 text-[#8b3f80] shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
             </div>
 
-            <Link to="/request-quote" className="why-choice-button">
-              Request a quote
-              <ArrowUpRight size={18} aria-hidden="true" />
-            </Link>
           </div>
-        </Reveal>
+
+        </div>
       </div>
     </section>
   );
