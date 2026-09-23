@@ -46,7 +46,7 @@ export default function HeroSection() {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="relative h-full w-full overflow-hidden">
-            {/* Background Image: Alternates coming from Left (-100%) and Right (100%) */}
+            {/* Background Image with Fade/Slide Animation */}
             {currentSlide === index && (
               <motion.div
                 initial={{ x: index % 2 === 0 ? "-100%" : "100%", opacity: 0 }}
@@ -63,13 +63,17 @@ export default function HeroSection() {
               </motion.div>
             )}
 
-            {/* Content Container */}
-            <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-center px-6 md:px-12 lg:px-20">
-              <div className="max-w-3xl">
-                
-                {/* Typewriter Heading (Shows unique text for this slide only) */}
-                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1] min-h-[140px] sm:min-h-[160px]">
-                  {currentSlide === index && (
+            {/* Content Container (Rendered exclusively for the active slide to prevent overlap) */}
+            {currentSlide === index && (
+              <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-center px-6 md:px-12 lg:px-20">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="max-w-3xl flex flex-col items-start"
+                >
+                  {/* Typewriter Heading */}
+                  <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.2]">
                     <Typewriter
                       options={{
                         strings: [slide.title],
@@ -78,34 +82,33 @@ export default function HeroSection() {
                         delay: 60,
                       }}
                     />
-                  )}
-                </h1>
+                  </h1>
 
-                {/* Subtitle */}
-                <p className="mt-4 text-lg text-slate-200 sm:text-xl font-normal max-w-2xl leading-relaxed">
-                  {slide.subtitle}
-                </p>
+                  {/* Subtitle */}
+                  <p className="mt-6 text-base sm:text-xl text-slate-200 font-normal max-w-2xl leading-relaxed">
+                    {slide.subtitle}
+                  </p>
 
-                {/* Action Buttons with Blue Shadow & Theme Colors */}
-                <div className="mt-10 flex flex-wrap items-center gap-5">
-                  <Link
-                    to="/request-quote"
-                    className="inline-flex items-center gap-3 rounded-full bg-[#8b3f80] px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
-                  >
-                    Request a quote
-                    <ArrowUpRight className="size-5" aria-hidden="true" />
-                  </Link>
+                  {/* Action Buttons */}
+                  <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-5">
+                    <Link
+                      to="/request-quote"
+                      className="inline-flex items-center gap-3 rounded-full bg-[#8b3f80] px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
+                    >
+                      Request a quote
+                      <ArrowUpRight className="size-5" aria-hidden="true" />
+                    </Link>
 
-                  <Link
-                    to="/tracking"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20 hover:border-white focus:outline-none"
-                  >
-                    Track Shipment
-                  </Link>
-                </div>
-
+                    <Link
+                      to="/tracking"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-md transition-all hover:bg-white/20 hover:border-white focus:outline-none"
+                    >
+                      Track Shipment
+                    </Link>
+                  </div>
+                </motion.div>
               </div>
-            </div>
+            )}
           </SwiperSlide>
         ))}
       </Swiper>
