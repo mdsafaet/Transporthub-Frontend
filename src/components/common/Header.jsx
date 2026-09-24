@@ -3,12 +3,12 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
-  { label: "Services", to: "/#services" },
-  { label: "Routes & Schedules", to: "/schedules" },
-  { label: "Container Tracking", to: "/tracking" },
-  { label: "About", to: "/about" },
-  { label: "Insights", to: "/insights" },
-  { label: "Contact", to: "/contact" },
+  { label: "Services", to: "#" },
+  { label: "Routes & Schedules", to: "#" },
+  { label: "Container Tracking", to: "#" },
+  { label: "About", to: "#" },
+  { label: "Insights", to: "#" },
+  { label: "Contact", to: "#" },
 ];
 
 export default function Header() {
