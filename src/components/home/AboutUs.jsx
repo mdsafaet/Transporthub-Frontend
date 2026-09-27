@@ -73,14 +73,14 @@ export default function AboutUs() {
           </div>
 
           <h2 className="text-3xl font-bold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-4xl lg:text-[46px] xl:text-[52px]">
-            Connecting Global Ports with Precision & Trust
+            Connecting Global Ports with Precision 
           </h2>
 
           <p className="mt-5 text-sm font-normal leading-7 text-slate-600 sm:text-base md:text-[17px]">
             At Coast Shipping, we deliver state-of-the-art maritime and
             container transport infrastructure. By uniting advanced logistics
             networks with real-time vessel visibility, we ensure your cargo
-            traverses global supply chains securely and on schedule.
+            traverses global supply chains securely .
           </p>
 
           <p className="mt-4 text-sm leading-7 text-slate-500 sm:text-[15px]">

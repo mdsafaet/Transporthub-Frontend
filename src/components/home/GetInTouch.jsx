@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function GetInTouch() {
   return (
-    <section className="overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] not-italic sm:px-6 sm:py-16 lg:px-10 lg:py-24">
-      <div className="relative mx-auto max-w-[1380px]">
+    <section className="overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] not-italic sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+     <div className="relative mx-auto w-full max-w-[1600px] lg:-translate-x-8">
         <div className="grid items-center lg:grid-cols-[52%_48%]">
-          <div className="relative h-[280px] overflow-hidden rounded-[32px] bg-slate-900 sm:h-[340px] lg:h-[420px] lg:rounded-r-none lg:rounded-tl-[120px]">
+       <div className="relative h-[280px] overflow-hidden rounded-[16px] rounded-br-[80px] bg-slate-900 sm:h-[340px] lg:h-[420px] lg:rounded-br-[120px]">
             <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=80"
+              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80"
               alt="Warehouse and logistics operations"
               loading="lazy"
               className="h-full w-full object-cover"
@@ -16,14 +16,14 @@ export default function GetInTouch() {
 
             <div className="absolute inset-0 bg-slate-950/40" />
 
-            <div className="flex h-full items-center justify-center absolute inset-0 lg:hidden">
+            <div className="absolute inset-0 flex items-center justify-center lg:hidden">
               <h2 className="text-4xl font-medium not-italic leading-tight text-white sm:text-5xl">
                 Get In Touch
               </h2>
             </div>
           </div>
 
-          <div className="px-2 py-8 text-center lg:px-0 lg:py-0 lg:pl-6 lg:text-left">
+         <div className="px-2 py-8 text-center lg:px-0 lg:py-0 lg:pl-2 lg:text-left">
             <div className="relative">
               <div className="hidden items-center gap-5 lg:flex">
                 <h2 className="relative whitespace-nowrap text-[66px] font-medium not-italic leading-[1.1] tracking-normal text-[#18324f] xl:text-[74px]">

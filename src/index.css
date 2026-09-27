@@ -195,3 +195,127 @@ footer a {
     transition: none;
   }
 }
+
+.card-left-curve,
+.card-right-curve {
+  border-radius: 16px;
+  border-top-right-radius: 120px;
+}
+
+@media (max-width: 1023px) {
+  .card-left-curve,
+  .card-right-curve {
+    border-top-right-radius: 80px;
+  }
+}
+
+.clients-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding-block: 8px;
+}
+
+.clients-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: clients-scroll 25s linear infinite;
+}
+
+.clients-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.clients-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 112px;
+}
+
+/* Pause without resetting the current position. */
+.clients-marquee:hover .clients-marquee-track,
+.clients-marquee:focus-within .clients-marquee-track {
+  animation-play-state: paused;
+}
+
+.clients-marquee:focus-visible {
+  outline: 2px solid #8b3f80;
+  outline-offset: -2px;
+}
+
+@keyframes clients-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 640px) {
+  .clients-marquee-group {
+    gap: 16px;
+    padding-right: 16px;
+  }
+
+  .clients-logo {
+    width: 240px;
+    height: 128px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee {
+    overflow-x: auto;
+  }
+
+  .clients-marquee-track {
+    animation: none;
+  }
+
+  .clients-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* Default: white countries */
+.coast-network .coast-world-map path.coast-map-country {
+  fill: #ffffff !important;
+  fill-opacity: 1 !important;
+  stroke: #cbd5e1 !important;
+  stroke-width: 0.6;
+  opacity: 1 !important;
+  outline: none;
+  transition:
+    fill 180ms ease,
+    stroke 180ms ease;
+}
+
+.coast-network .coast-world-map path.coast-map-country.is-selectable {
+  cursor: pointer;
+}
+
+/* Hover: light pink across the region */
+.coast-network .coast-world-map path.coast-map-country.is-hovered {
+  fill: #f3d6e7 !important;
+  stroke: #d881b3 !important;
+}
+
+/* Selected: darker pink; takes priority over hover */
+.coast-network .coast-world-map path.coast-map-country.is-selected {
+  fill: #e8b5d2 !important;
+  stroke: #c66ba3 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coast-network .coast-world-map path.coast-map-country {
+    transition: none;
+  }
+}

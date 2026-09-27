@@ -15,6 +15,10 @@ import {
 
 export default function GlobalNetwork() {
   const [activeRegion, setActiveRegion] = useState(null);
+  const [hoveredRegion, setHoveredRegion] = useState(null);
+  const [focusedRegion, setFocusedRegion] = useState(null);
+
+  const previewRegion = hoveredRegion ?? focusedRegion;
 
   return (
     <section
@@ -30,7 +34,7 @@ export default function GlobalNetwork() {
               className="shrink-0 text-[#8b3f80]"
             />
 
-            <span>Click a region to highlight it on the map</span>
+            <span>Hover to explore. Click to select a region.</span>
           </div>
         </div>
 
@@ -52,7 +56,7 @@ export default function GlobalNetwork() {
               className="coast-world-map"
               aria-label={
                 activeRegion
-                  ? `World map highlighting ${activeRegion}`
+                  ? `World map. Selected region: ${activeRegion}`
                   : "World map with no region selected"
               }
             >
@@ -70,6 +74,9 @@ export default function GlobalNetwork() {
                       const isSelected =
                         Boolean(region) && region === activeRegion;
 
+                      const isHovered =
+                        Boolean(region) && region === previewRegion;
+
                       return (
                         <Geography
                           key={geo.rsmKey}
@@ -79,10 +86,15 @@ export default function GlobalNetwork() {
                           className={[
                             "coast-map-country",
                             region ? "is-selectable" : "",
+                            isHovered ? "is-hovered" : "",
                             isSelected ? "is-selected" : "",
                           ]
                             .filter(Boolean)
                             .join(" ")}
+                          onMouseEnter={() =>
+                            setHoveredRegion(region ?? null)
+                          }
+                          onMouseLeave={() => setHoveredRegion(null)}
                           onClick={() => {
                             if (region) setActiveRegion(region);
                           }}
@@ -99,6 +111,8 @@ export default function GlobalNetwork() {
                   <Marker
                     key={name}
                     coordinates={coordinates}
+                    onMouseEnter={() => setHoveredRegion(name)}
+                    onMouseLeave={() => setHoveredRegion(null)}
                     onClick={() => setActiveRegion(name)}
                     className="coast-map-marker"
                   >
@@ -136,6 +150,10 @@ export default function GlobalNetwork() {
               key={name}
               type="button"
               aria-pressed={activeRegion === name}
+              onMouseEnter={() => setHoveredRegion(name)}
+              onMouseLeave={() => setHoveredRegion(null)}
+              onFocus={() => setFocusedRegion(name)}
+              onBlur={() => setFocusedRegion(null)}
               onClick={() => setActiveRegion(name)}
               className="coast-region-button"
             >
@@ -146,7 +164,7 @@ export default function GlobalNetwork() {
 
         <p role="status" className="sr-only">
           {activeRegion
-            ? `${activeRegion} highlighted on the map`
+            ? `${activeRegion} selected`
             : "No region selected"}
         </p>
       </div>

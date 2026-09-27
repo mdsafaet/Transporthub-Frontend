@@ -1,125 +1,158 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
-  { label: "Services", to: "#" },
-  { label: "Routes & Schedules", to: "#" },
-  { label: "Container Tracking", to: "#" },
-  { label: "About", to: "#" },
-  { label: "Insights", to: "#" },
-  { label: "Contact", to: "#" },
+  { label: "Services", to: "/#services" },
+  { label: "Routes & Schedules", to: "/schedules" },
+  { label: "Container Tracking", to: "/tracking" },
+  { label: "About", to: "/about" },
+  { label: "Insights", to: "/insights" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname, hash } = useLocation();
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname, hash]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const closeMenu = () => setMenuOpen(false);
+
+    desktop.addEventListener("change", closeMenu);
+
+    return () => {
+      desktop.removeEventListener("change", closeMenu);
+    };
+  }, []);
+
+  const isActive = (to) =>
+    to === "/#services"
+      ? pathname === "/" && hash === "#services"
+      : pathname === to;
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white/95 shadow-lg shadow-blue-500/10 backdrop-blur-md">
-      {/* Main Header Container */}
-      <div className="mx-auto flex h-20 md:h-22 lg:h-24 w-full items-center justify-between px-4 sm:px-6 md:px-10 lg:px-16">
-        
-        {/* Brand Logo & Name (Increased Logo Size) */}
+    <header className="fixed inset-x-0 top-0 z-50 bg-white font-['Exo',sans-serif] shadow-lg shadow-blue-500/10">
+      <div className="mx-auto flex h-[100px] w-full max-w-[1700px] items-center justify-between gap-5 px-2 sm:px-4 lg:px-4 xl:h-[120px]">
         <Link
           to="/"
-          className="flex items-center gap-3 focus:outline-none"
+          onClick={() => setMenuOpen(false)}
           aria-label="Coast Shipping home"
+          className="flex shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80]"
         >
           <img
             src="/images/Coastshipp.jpeg"
             alt="Coast Shipping"
-            className="h-20 w-20 sm:h-20 sm:w-20 md:h-22 md:w-22 rounded-xl object-contain bg-white"
+            width={190}
+            height={100}
+            className="h-[80px] w-[160px] object-contain xl:h-[100px] xl:w-[190px]"
           />
         </Link>
 
-        {/* Centered Desktop Navigation */}
-        <nav aria-label="Main Navigation" className="hidden items-center gap-5 lg:gap-7 xl:gap-8 lg:flex">
-          {navigation.map(({ label, to }) => {
-            const isActive = pathname === to || (to.includes("#") && hash === "#services");
-            return (
-              <Link
-                key={to}
-                to={to}
-                className={`text-sm md:text-[15px] font-medium transition-colors hover:text-[#8b3f80] ${
-                  isActive ? "text-[#8b3f80]" : "text-slate-700"
-                }`}
-              >
-                {label}
-              </Link>
-            );
-          })}
+        <nav
+          aria-label="Main navigation"
+          className="hidden flex-1 items-center justify-center gap-4 xl:flex 2xl:gap-7"
+        >
+          {navigation.map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              aria-current={isActive(to) ? "page" : undefined}
+              className={`whitespace-nowrap py-3 text-sm font-medium transition-colors hover:text-[#8b3f80] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80] ${
+                isActive(to) ? "text-[#8b3f80]" : "text-slate-700"
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden shrink-0 items-center gap-5 xl:flex">
           <Link
             to="/login"
-            className="text-[15px] font-medium text-slate-700 transition-colors hover:text-[#8b3f80]"
+            className="py-3 text-sm font-medium text-slate-700 transition-colors hover:text-[#8b3f80] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80]"
           >
             Login
           </Link>
 
           <Link
             to="/request-quote"
-            className="inline-flex items-center gap-2.5 rounded-full bg-[#8b3f80] px-6 py-3 text-[15px] font-semibold text-white shadow-lg transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
+            className="inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#8b3f80] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c7854b] hover:text-[#18324f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80]"
           >
             Request a quote
-            <ArrowUpRight className="size-4.5" aria-hidden="true" />
+            <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
         <button
+          id="coast-menu-toggle"
           type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
+          aria-controls="coast-mobile-navigation"
           aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-          className="relative z-[60] flex size-10 sm:size-11 items-center justify-center rounded-lg text-slate-900 transition hover:bg-slate-100 lg:hidden"
+          className="flex size-11 shrink-0 items-center justify-center rounded-lg text-slate-900 transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80] xl:hidden"
         >
-          {menuOpen ? <X className="size-6 sm:size-7" /> : <Menu className="size-6 sm:size-7" />}
+          {menuOpen ? (
+            <X size={26} aria-hidden="true" />
+          ) : (
+            <Menu size={26} aria-hidden="true" />
+          )}
         </button>
       </div>
 
-      {/* Full-Screen Mobile & Tablet Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 h-dvh w-screen flex flex-col justify-between bg-white px-6 pt-28 pb-12 overflow-y-auto lg:hidden">
-          <nav aria-label="Mobile Navigation" className="flex flex-col gap-6">
-            {navigation.map(({ label, to }) => {
-              const isActive = pathname === to || (to.includes("#") && hash === "#services");
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  onClick={() => setMenuOpen(false)}
-                  className={`text-xl sm:text-2xl font-semibold transition hover:text-[#8b3f80] ${
-                    isActive ? "text-[#8b3f80]" : "text-slate-800"
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-            <div className="my-2 h-px bg-slate-200" />
+        <div
+          id="coast-mobile-navigation"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              setMenuOpen(false);
+              document.getElementById("coast-menu-toggle")?.focus();
+            }
+          }}
+          className="fixed inset-x-0 bottom-0 top-[100px] flex flex-col justify-between overflow-y-auto overscroll-contain border-t border-slate-100 bg-white px-6 py-6 xl:hidden"
+        >
+          <nav
+            aria-label="Mobile navigation"
+            className="flex flex-col gap-2"
+          >
+            {navigation.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => setMenuOpen(false)}
+                aria-current={isActive(to) ? "page" : undefined}
+                className={`rounded-md px-3 py-3 text-lg font-medium transition-colors hover:bg-slate-50 hover:text-[#8b3f80] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b3f80] ${
+                  isActive(to)
+                    ? "bg-[#8b3f80]/5 text-[#8b3f80]"
+                    : "text-slate-800"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+
             <Link
               to="/login"
               onClick={() => setMenuOpen(false)}
-              className="text-xl sm:text-2xl font-semibold text-slate-800 transition hover:text-[#8b3f80]"
+              className="mt-3 border-t border-slate-200 px-3 py-4 text-lg font-medium text-slate-800 hover:text-[#8b3f80] focus-visible:outline-2 focus-visible:outline-[#8b3f80]"
             >
               Login
             </Link>
           </nav>
 
-          <div className="mt-8">
-            <Link
-              to="/request-quote"
-              onClick={() => setMenuOpen(false)}
-              className="flex w-full items-center justify-center gap-2.5 rounded-full bg-[#8b3f80] px-6 py-4 text-center text-base sm:text-lg font-semibold text-white shadow-lg transition hover:bg-[#c7854b]"
-            >
-              Request a quote
-              <ArrowUpRight className="size-5" />
-            </Link>
-          </div>
+          <Link
+            to="/request-quote"
+            onClick={() => setMenuOpen(false)}
+            className="mt-8 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#8b3f80] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#c7854b] hover:text-[#18324f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80]"
+          >
+            Request a quote
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
         </div>
       )}
     </header>

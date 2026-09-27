@@ -1,138 +1,154 @@
 import { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 import { ArrowRight, Package, Headphones } from "lucide-react";
 import { Link } from "react-router-dom";
 
-function TiltCard({ children, bgClass, curveClass }) {
-  const cardRef = useRef(null);
+const springConfig = {
+  stiffness: 100,
+  damping: 22,
+  mass: 0.8,
+};
 
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
+function TiltCard({ children, bgClass }) {
+  const wrapperRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  const targetX = useMotionValue(0);
+  const targetY = useMotionValue(0);
+  const targetLift = useMotionValue(0);
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  const rotateX = useSpring(targetX, springConfig);
+  const rotateY = useSpring(targetY, springConfig);
+  const lift = useSpring(targetLift, springConfig);
 
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.01, 1.01, 1.01)`;
+  const resetTilt = () => {
+    targetX.set(0);
+    targetY.set(0);
+    targetLift.set(0);
   };
 
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)`;
+  const handlePointerMove = (event) => {
+    if (
+      reduceMotion ||
+      event.pointerType !== "mouse" ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      resetTilt();
+      return;
+    }
+
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const rect = wrapper.getBoundingClientRect();
+
+    const pointerX = Math.max(
+      -1,
+      Math.min(1, ((event.clientX - rect.left) / rect.width) * 2 - 1),
+    );
+
+    const pointerY = Math.max(
+      -1,
+      Math.min(1, ((event.clientY - rect.top) / rect.height) * 2 - 1),
+    );
+
+    targetX.set(-pointerY * 5);
+    targetY.set(pointerX * 5);
+    targetLift.set(-4);
   };
 
   return (
     <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        willChange: "transform",
-        transition: "transform 300ms cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 300ms ease",
-      }}
-      className={`relative flex flex-col justify-between p-8 sm:p-12 md:p-16 ${bgClass} ${curveClass} min-h-[340px] sm:min-h-[380px] lg:min-h-[420px] shadow-xl hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)]`}
+      ref={wrapperRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+      onPointerCancel={resetTilt}
+      className="min-w-0"
+      style={{ perspective: 1200 }}
     >
-      {children}
+      <motion.div
+        style={{
+          rotateX: reduceMotion ? 0 : rotateX,
+          rotateY: reduceMotion ? 0 : rotateY,
+          y: reduceMotion ? 0 : lift,
+        }}
+     className={`relative flex h-[280px] flex-col justify-between rounded-[16px] rounded-tr-[80px] p-8 shadow-xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)] motion-reduce:transition-none sm:h-[340px] sm:p-12 md:p-16 lg:h-[420px] lg:rounded-tr-[120px] ${bgClass}`}
+      >
+        {children}
+      </motion.div>
     </div>
   );
 }
 
 export default function WhatWeMove() {
   return (
-    <>
-      <style>{`
-        .card-left-curve {
-          border-radius: 2rem;
-          border-bottom-left-radius: 120px;
-        }
-        .card-right-curve {
-          border-radius: 2rem;
-          border-top-right-radius: 120px;
-        }
-        @media (max-width: 1023px) {
-          .card-left-curve, .card-right-curve {
-            border-radius: 2rem;
-          }
-        }
-      `}</style>
+    <section className="w-full overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] sm:px-8 md:px-12 lg:px-20 lg:py-24">
+      <div className="mx-auto w-full max-w-[1700px]">
+        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+          <TiltCard bgClass="bg-[#e2e8f0] text-blue-950">
+            <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider sm:text-sm">
+              <Package className="size-4" aria-hidden="true" />
+              <span>Commodities</span>
+            </div>
 
-      {/* Expanded section width with broader side padding */}
-      <section className="w-full bg-white px-4 py-12 sm:px-8 md:px-12 lg:px-20 lg:py-24 exo-font overflow-hidden">
-        <div className="mx-auto w-full max-w-[1700px]">
-          
-          {/* Main Grid Container */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full">
-            
-            {/* CARD 1: WHAT WE MOVE */}
-            <TiltCard bgClass="bg-[#e2e8f0]" curveClass="card-left-curve">
-              {/* Top Meta */}
-              <div className="flex items-center gap-2.5 text-blue-950 font-bold text-xs sm:text-sm tracking-wider uppercase">
-                <Package className="size-4 text-blue-950" />
-                <span>COMMODITIES</span>
-              </div>
+            <div className="my-auto py-6">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                What we Move
+              </h2>
+            </div>
 
-              {/* Center Title */}
-              <div className="my-auto py-6">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-                  What we Move
-                </h2>
-              </div>
+            <div>
+              <Link
+                to="/commodities"
+                className="group inline-flex w-fit items-center justify-between gap-8 rounded-full border border-blue-950/20 px-6 py-3 text-xs font-bold tracking-wide transition-colors hover:border-[#8b3f80] hover:bg-[#8b3f80]/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80] motion-reduce:transition-none sm:text-sm"
+              >
+                <span>Commodities</span>
 
-              {/* Bottom Pill Action Button */}
-              <div>
-                <Link
-                  to="/commodities"
-                  className="inline-flex items-center justify-between px-6 py-3 rounded-full border border-blue-950/20 bg-transparent text-blue-950 text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 hover:border-[#8b3f80] hover:bg-[#8b3f80]/5 group w-fit gap-8"
-                >
-                  <span>Commodities</span>
-                  <div className="size-8 rounded-full bg-blue-950 text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#8b3f80] group-hover:translate-x-1 shrink-0">
-                    <ArrowRight className="size-4" />
-                  </div>
-                </Link>
-              </div>
-            </TiltCard>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-blue-950 text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#8b3f80] motion-reduce:transform-none motion-reduce:transition-none">
+                  <ArrowRight
+                    className="size-4"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
+            </div>
+          </TiltCard>
 
+          <TiltCard bgClass="bg-blue-950 text-white">
+            <div className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-white/90 sm:text-sm">
+              <Headphones className="size-4" aria-hidden="true" />
+              <span>Our Services</span>
+            </div>
 
-            {/* CARD 2: HOW WE MOVE */}
-            <TiltCard bgClass="bg-blue-950 text-white" curveClass="card-right-curve">
-              {/* Top Meta */}
-              <div className="flex items-center gap-2.5 text-white/90 font-bold text-xs sm:text-sm tracking-wider uppercase">
-                <Headphones className="size-4 text-white" />
-                <span>OUR SERVICES</span>
-              </div>
+            <div className="my-auto py-6">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                How we Move
+              </h2>
+            </div>
 
-              {/* Center Title */}
-              <div className="my-auto py-6">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-                  How we Move
-                </h2>
-              </div>
+            <div>
+              <Link
+                to="/services"
+                className="group inline-flex w-fit items-center justify-between gap-8 rounded-full border border-white/20 px-6 py-3 text-xs font-bold tracking-wide transition-colors hover:border-[#c7854b] hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c7854b] motion-reduce:transition-none sm:text-sm"
+              >
+                <span>Services</span>
 
-              {/* Bottom Pill Action Button */}
-              <div>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-between px-6 py-3 rounded-full border border-white/20 bg-transparent text-white text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 hover:border-[#c7854b] hover:bg-white/5 group w-fit gap-8"
-                >
-                  <span>Services</span>
-                  <div className="size-8 rounded-full bg-white text-blue-950 flex items-center justify-center transition-all duration-300 group-hover:bg-[#c7854b] group-hover:text-white group-hover:translate-x-1 shrink-0">
-                    <ArrowRight className="size-4" />
-                  </div>
-                </Link>
-              </div>
-            </TiltCard>
-
-          </div>
-
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-blue-950 transition duration-300 group-hover:translate-x-1 group-hover:bg-[#c7854b] motion-reduce:transform-none motion-reduce:transition-none">
+                  <ArrowRight
+                    className="size-4"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
+            </div>
+          </TiltCard>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
