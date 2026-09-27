@@ -20,7 +20,7 @@ export default function Header() {
       {/* Main Header Container */}
       <div className="mx-auto flex h-20 md:h-22 lg:h-24 w-full items-center justify-between px-4 sm:px-6 md:px-10 lg:px-16">
         
-        {/* Brand Logo & Name */}
+        {/* Brand Logo & Name (Increased Logo Size) */}
         <Link
           to="/"
           className="flex items-center gap-3 focus:outline-none"
@@ -29,11 +29,8 @@ export default function Header() {
           <img
             src="/images/Coastshipp.jpeg"
             alt="Coast Shipping"
-            className="h-11 w-12 sm:h-12 sm:w-14 md:h-14 md:w-16 rounded-lg object-contain bg-white"
+            className="h-20 w-20 sm:h-20 sm:w-20 md:h-22 md:w-22 rounded-xl object-contain bg-white"
           />
-          <span className="text-base sm:text-lg md:text-xl font-semibold tracking-tight text-slate-900">
-            Coast <span className="text-[#8b3f80]">Shipping</span>
-          </span>
         </Link>
 
         {/* Centered Desktop Navigation */}
@@ -84,7 +81,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Full-Screen Mobile & Tablet Menu Overlay (True 100vh / 100dvh coverage) */}
+      {/* Full-Screen Mobile & Tablet Menu Overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 h-dvh w-screen flex flex-col justify-between bg-white px-6 pt-28 pb-12 overflow-y-auto lg:hidden">
           <nav aria-label="Mobile Navigation" className="flex flex-col gap-6">

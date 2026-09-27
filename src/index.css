@@ -79,3 +79,119 @@ footer a {
     border-bottom-right-radius: 60px;
   }
 }
+
+/* Global network map */
+
+.coast-network {
+  font-family: "Exo", Arial, sans-serif;
+}
+
+.coast-map-viewport {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+}
+
+.coast-map-canvas {
+  min-width: 700px;
+}
+
+.coast-world-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+}
+
+/* Explicit fills prevent global SVG styles from making countries black. */
+
+.coast-network .coast-world-map path.coast-map-country {
+  fill: #ffffff !important;
+  fill-opacity: 1 !important;
+  stroke: #cbd5e1 !important;
+  stroke-width: 0.6;
+  opacity: 1 !important;
+  outline: none;
+}
+
+.coast-network .coast-world-map path.coast-map-country.is-selectable {
+  cursor: pointer;
+}
+
+.coast-network .coast-world-map path.coast-map-country.is-selected {
+  fill: #e8b5d2 !important;
+  stroke: #d881b3 !important;
+}
+
+/* Region labels */
+
+.coast-map-marker {
+  cursor: pointer;
+}
+
+.coast-network .coast-map-label {
+  fill: #18324f !important;
+  stroke: none !important;
+  font-family: "Exo", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  user-select: none;
+}
+
+.coast-network .coast-map-label.is-selected {
+  font-weight: 700;
+}
+
+.coast-network .coast-map-pin {
+  fill: #8b3f80 !important;
+  stroke: #ffffff !important;
+  stroke-width: 1.5;
+}
+
+/* Region buttons */
+
+.coast-region-button {
+  min-height: 44px;
+  border: 1px solid #dbe3ec;
+  border-radius: 6px;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #18324f;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.coast-region-button:hover {
+  border-color: #8b3f80;
+}
+
+.coast-region-button[aria-pressed="true"] {
+  border-color: #8b3f80;
+  background: #8b3f80;
+  color: #ffffff;
+}
+
+.coast-region-button[aria-pressed="true"]:hover {
+  border-color: #c7854b;
+  background: #c7854b;
+  color: #18324f;
+}
+
+.coast-region-button:focus-visible,
+.coast-map-viewport:focus-visible {
+  outline: 2px solid #8b3f80;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coast-region-button {
+    transition: none;
+  }
+}

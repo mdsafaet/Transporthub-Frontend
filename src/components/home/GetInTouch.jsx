@@ -3,155 +3,63 @@ import { Link } from "react-router-dom";
 
 export default function GetInTouch() {
   return (
-    <section className="w-full bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16 lg:py-20 exo-font overflow-hidden">
-      <div className="mx-auto w-full max-w-[1200px]">
-
-        <div className="flex w-full flex-col lg:flex-row lg:items-center lg:gap-0">
-
-          {/* LEFT IMAGE */}
-          <div
-            className="
-              relative
-              w-full
-              h-[280px]
-              sm:h-[340px]
-              md:h-[380px]
-              lg:h-[400px]
-              lg:w-1/2
-              shrink-0
-              overflow-hidden
-              bg-slate-900
-              curved-image-container
-            "
-          >
+    <section className="overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] not-italic sm:px-6 sm:py-16 lg:px-10 lg:py-24">
+      <div className="relative mx-auto max-w-[1380px]">
+        <div className="grid items-center lg:grid-cols-[52%_48%]">
+          <div className="relative h-[280px] overflow-hidden rounded-[32px] bg-slate-900 sm:h-[340px] lg:h-[420px] lg:rounded-r-none lg:rounded-tl-[120px]">
             <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
-              alt="Shipping Container Terminal Logistics"
-              className="h-full w-full object-cover object-center brightness-95"
+              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=80"
+              alt="Warehouse and logistics operations"
+              loading="lazy"
+              className="h-full w-full object-cover"
             />
 
-            <div className="absolute inset-0 bg-slate-950/30" />
+            <div className="absolute inset-0 bg-slate-950/40" />
 
-            {/* GET IN */}
-            <div
-              className="
-                absolute inset-0
-                flex items-center justify-center
-                lg:justify-end
-                lg:pr-4
-                xl:pr-5
-              "
-            >
-              <h2
-                className="
-                  whitespace-nowrap
-                  text-[42px]
-                  sm:text-[52px]
-                  md:text-[58px]
-                  lg:text-[60px]
-                  xl:text-[64px]
-                  font-normal
-                  leading-none
-                  tracking-wide
-                  text-white
-                "
-              >
-                Get In
+            <div className="flex h-full items-center justify-center absolute inset-0 lg:hidden">
+              <h2 className="text-4xl font-medium not-italic leading-tight text-white sm:text-5xl">
+                Get In Touch
               </h2>
             </div>
           </div>
 
-          {/* RIGHT CONTENT */}
-          <div
-            className="
-              flex
-              w-full
-              lg:w-1/2
-              items-center
-              justify-center
-              py-8
-              text-center
-
-              lg:justify-start
-              lg:py-0
-              lg:pl-4
-              xl:pl-5
-              lg:text-left
-            "
-          >
-            <div className="flex flex-col items-center lg:items-start">
-
-              {/* TOUCH + ARROW */}
-              <div className="flex items-center gap-4 sm:gap-5 whitespace-nowrap">
-
-                <h2
-                  className="
-                    text-[42px]
-                    sm:text-[52px]
-                    md:text-[58px]
-                    lg:text-[60px]
-                    xl:text-[64px]
-                    font-bold
-                    leading-none
-                    tracking-tight
-                    text-blue-950
-                  "
-                >
+          <div className="px-2 py-8 text-center lg:px-0 lg:py-0 lg:pl-6 lg:text-left">
+            <div className="relative">
+              <div className="hidden items-center gap-5 lg:flex">
+                <h2 className="relative whitespace-nowrap text-[66px] font-medium not-italic leading-[1.1] tracking-normal text-[#18324f] xl:text-[74px]">
+                  <span className="absolute right-full top-0 pr-6 text-white">
+                    Get In
+                  </span>
                   Touch
                 </h2>
 
                 <Link
                   to="/contact"
-                  aria-label="Go to contact page"
-                  className="
-                    flex
-                    size-11
-                    sm:size-12
-                    lg:size-14
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-[#8b3f80]
-                    text-white
-                    shadow-md
-                    transition-all
-                    duration-300
-                    hover:bg-[#c7854b]
-                    group
-                  "
+                  aria-label="Contact Coast Shipping"
+                  className="group flex size-14 shrink-0 items-center justify-center rounded-full bg-[#8b3f80] text-white transition-colors hover:bg-[#c7854b] hover:text-[#18324f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80] xl:size-16"
                 >
                   <ArrowRight
-                    className="
-                      size-5
-                      transition-transform
-                      duration-300
-                      group-hover:translate-x-1
-                    "
+                    aria-hidden="true"
+                    className="size-6 transition-transform group-hover:translate-x-1 motion-reduce:transform-none"
                   />
                 </Link>
               </div>
 
-              {/* SUBTITLE */}
-              <p
-                className="
-                  mt-3
-                  max-w-[460px]
-                  text-xs
-                  sm:text-sm
-                  font-normal
-                  tracking-wide
-                  text-slate-500
-                "
-              >
-                Get local advice for your global request. Contact us now.
+              <p className="mx-auto max-w-[440px] text-sm leading-7 text-slate-500 sm:text-base lg:absolute lg:left-0 lg:top-full lg:mt-5">
+                Get local advice for your global request. Contact us
+                to discuss shipping solutions for your business.
               </p>
 
+              <Link
+                to="/contact"
+                className="mt-6 inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-[#8b3f80] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#c7854b] hover:text-[#18324f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b3f80] lg:hidden"
+              >
+                Contact us
+                <ArrowRight size={18} aria-hidden="true" />
+              </Link>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

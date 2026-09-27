@@ -28,7 +28,7 @@ const Home = () => {
       <OurProjects  />
       <WhatWeMove />
       <GetInTouch />
-      {/* <GlobalNetwork /> */}
+      <GlobalNetwork />
 
         {/* <ServiceSectionn />
         <TrackingSection />

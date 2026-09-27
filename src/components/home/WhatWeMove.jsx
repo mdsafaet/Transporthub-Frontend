@@ -37,7 +37,7 @@ function TiltCard({ children, bgClass, curveClass }) {
         willChange: "transform",
         transition: "transform 300ms cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 300ms ease",
       }}
-      className={`relative flex flex-col justify-between p-8 sm:p-12 md:p-14 ${bgClass} ${curveClass} min-h-[320px] sm:min-h-[360px] lg:min-h-[400px] shadow-xl hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)]`}
+      className={`relative flex flex-col justify-between p-8 sm:p-12 md:p-16 ${bgClass} ${curveClass} min-h-[340px] sm:min-h-[380px] lg:min-h-[420px] shadow-xl hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)]`}
     >
       {children}
     </div>
@@ -48,11 +48,12 @@ export default function WhatWeMove() {
   return (
     <>
       <style>{`
-        /* Custom asymmetric curved corners matching your design */
         .card-left-curve {
+          border-radius: 2rem;
           border-bottom-left-radius: 120px;
         }
         .card-right-curve {
+          border-radius: 2rem;
           border-top-right-radius: 120px;
         }
         @media (max-width: 1023px) {
@@ -62,8 +63,9 @@ export default function WhatWeMove() {
         }
       `}</style>
 
-      <section className="w-full bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16 lg:py-24 exo-font overflow-hidden">
-        <div className="mx-auto w-full max-w-[1300px]">
+      {/* Expanded section width with broader side padding */}
+      <section className="w-full bg-white px-4 py-12 sm:px-8 md:px-12 lg:px-20 lg:py-24 exo-font overflow-hidden">
+        <div className="mx-auto w-full max-w-[1700px]">
           
           {/* Main Grid Container */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full">

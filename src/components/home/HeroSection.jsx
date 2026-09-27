@@ -35,7 +35,7 @@ export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <section className="relative h-[90vh] min-h-[650px] w-full overflow-hidden bg-black pt-24 exo-font">
+    <section className="relative h-screen min-h-[750px] w-full overflow-hidden bg-black pt-24 exo-font">
       <Swiper
         modules={[Autoplay, EffectFade, Pagination]}
         effect="fade"
@@ -46,7 +46,7 @@ export default function HeroSection() {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="relative h-full w-full overflow-hidden">
-            {/* Background Image with Zoom-In Animation */}
+            {/* Background Image with Zoom-In Animation on Slide Change */}
             {currentSlide === index && (
               <motion.div
                 initial={{ scale: 1.0, opacity: 0 }}
@@ -89,11 +89,11 @@ export default function HeroSection() {
                     {slide.subtitle}
                   </p>
 
-                  {/* Action Buttons */}
+                  {/* Action Buttons (Shadows Removed) */}
                   <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-5">
                     <Link
                       to="/request-quote"
-                      className="inline-flex items-center gap-3 rounded-full bg-[#8b3f80] px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-[#c7854b] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
+                      className="inline-flex items-center gap-3 rounded-full bg-[#8b3f80] px-8 py-4 text-base font-semibold text-white transition-all hover:bg-[#c7854b] focus:outline-none focus:ring-2 focus:ring-[#8b3f80] focus:ring-offset-2"
                     >
                       Request a quote
                       <ArrowUpRight className="size-5" aria-hidden="true" />

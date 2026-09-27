@@ -88,7 +88,7 @@ function ProjectCard({ project, onClick }) {
         willChange: "transform",
         transition: "transform 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 400ms ease",
       }}
-      className="group relative block h-full min-h-[350px] sm:min-h-[380px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/60 bg-slate-900/90 p-5 sm:p-7 backdrop-blur-xl hover:border-[#c7854b]/50 hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.4)] cursor-pointer flex flex-col justify-between"
+      className="group relative block h-full min-h-[350px] sm:min-h-[380px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/30 bg-[#5c5a96] p-5 sm:p-7 backdrop-blur-xl hover:border-[#c7854b]/50 hover:shadow-[0_25px_50px_-12px_rgba(92,90,150,0.5)] cursor-pointer flex flex-col justify-between"
     >
       {/* Project Thumbnail Image */}
       <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-xl bg-slate-950 mb-5 sm:mb-6 border border-white/10">
@@ -97,7 +97,7 @@ function ProjectCard({ project, onClick }) {
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#5c5a96]/80 via-transparent to-transparent" />
         <span className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[#c7854b] text-[10px] sm:text-[11px] font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider border border-white/10">
           {project.category}
         </span>
@@ -109,15 +109,15 @@ function ProjectCard({ project, onClick }) {
           <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-[#c7854b] transition-colors leading-snug">
             {project.title}
           </h3>
-          <p className="mt-2 text-xs sm:text-sm text-slate-300 line-clamp-2">
+          <p className="mt-2 text-xs sm:text-sm text-slate-100/90 line-clamp-2 leading-relaxed">
             {project.description}
           </p>
         </div>
 
-        <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-[#c7854b]">
-          <span>View Project Details</span>
-          <div className="size-7 sm:size-8 rounded-full bg-[#8b3f80]/30 flex items-center justify-center transition-all group-hover:bg-[#8b3f80] group-hover:text-white border border-[#8b3f80]/30">
-            <ArrowUpRight className="size-3.5 sm:size-4" />
+        <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20 flex items-center justify-between text-xs font-semibold text-[#c7854b]">
+          <span className="text-white group-hover:text-[#c7854b] transition-colors">View Project Details</span>
+          <div className="size-7 sm:size-8 rounded-full bg-white/20 flex items-center justify-center transition-all group-hover:bg-[#c7854b] group-hover:text-white border border-white/20">
+            <ArrowUpRight className="size-3.5 sm:size-4 text-white" />
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function OurProjects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
               transition={{ type: "spring", stiffness: 350, damping: 28 }}
-              className="relative w-full max-w-3xl bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-3xl bg-[#5c5a96] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header Image */}
               <div className="relative h-48 sm:h-64 md:h-72 w-full shrink-0">
@@ -215,7 +215,7 @@ export default function OurProjects() {
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#5c5a96] via-[#5c5a96]/40 to-transparent" />
                 
                 <button
                   onClick={() => setSelectedProject(null)}
@@ -235,20 +235,20 @@ export default function OurProjects() {
               </div>
 
               {/* Modal Scrollable Body */}
-              <div className="p-4 sm:p-6 md:p-8 overflow-y-auto space-y-5 sm:space-y-6 bg-slate-900 text-slate-300">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 bg-slate-950/60 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10">
+              <div className="p-4 sm:p-6 md:p-8 overflow-y-auto space-y-5 sm:space-y-6 bg-[#5c5a96] text-white">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 bg-black/20 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10">
                   <div>
-                    <span className="text-[11px] sm:text-xs text-slate-400 block font-medium">Client</span>
+                    <span className="text-[11px] sm:text-xs text-slate-200 block font-medium">Client</span>
                     <span className="text-xs sm:text-sm font-bold text-white">{selectedProject.client}</span>
                   </div>
                   <div>
-                    <span className="text-[11px] sm:text-xs text-slate-400 block font-medium">Duration</span>
+                    <span className="text-[11px] sm:text-xs text-slate-200 block font-medium">Duration</span>
                     <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-1 mt-0.5">
                       <Calendar className="size-3.5 text-[#c7854b]" /> {selectedProject.duration}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[11px] sm:text-xs text-slate-400 block font-medium">Location</span>
+                    <span className="text-[11px] sm:text-xs text-slate-200 block font-medium">Location</span>
                     <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-1 mt-0.5">
                       <MapPin className="size-3.5 text-[#c7854b]" /> {selectedProject.location}
                     </span>
@@ -257,7 +257,7 @@ export default function OurProjects() {
 
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#c7854b]">Project Overview</h4>
-                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed">
+                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base text-slate-100 leading-relaxed">
                     {selectedProject.description}
                   </p>
                 </div>
@@ -266,24 +266,24 @@ export default function OurProjects() {
                   <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#c7854b] mb-2 sm:mb-3">Key Highlights & Delivery</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                     {selectedProject.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-start gap-2 bg-[#8b3f80]/10 p-2.5 sm:p-3 rounded-xl border border-[#8b3f80]/20">
+                      <div key={idx} className="flex items-start gap-2 bg-black/20 p-2.5 sm:p-3 rounded-xl border border-white/10">
                         <CheckCircle2 className="size-4 text-[#c7854b] shrink-0 mt-0.5" />
-                        <span className="text-xs font-semibold text-slate-200">{highlight}</span>
+                        <span className="text-xs font-semibold text-white">{highlight}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
+                <div className="pt-4 border-t border-white/20 flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-white/20 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 transition-colors"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-white/30 text-xs sm:text-sm font-semibold text-white hover:bg-white/10 transition-colors"
                   >
                     Close
                   </button>
                   <Link
                     to="/contact"
-                    className="w-full sm:w-auto text-center px-6 py-2.5 rounded-full bg-[#8b3f80] text-xs sm:text-sm font-semibold text-white shadow-lg shadow-[#8b3f80]/30 hover:bg-[#c7854b] transition-colors"
+                    className="w-full sm:w-auto text-center px-6 py-2.5 rounded-full bg-[#8b3f80] text-xs sm:text-sm font-semibold text-white shadow-lg hover:bg-[#c7854b] transition-colors"
                   >
                     Inquire Similar Project
                   </Link>
