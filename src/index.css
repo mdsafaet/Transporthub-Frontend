@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-
-
 :root {
   font-family: 'Exo', sans-serif;
   color: #ffffff;
@@ -63,4 +61,21 @@ footer a {
 
 .hover-scale-img:hover {
   transform: scale(1.03);
+}
+
+/* Exact curved cutout matching your design reference */
+.curved-image-container {
+  border-bottom-right-radius: 180px;
+}
+
+@media (max-width: 1023px) {
+  .curved-image-container {
+    border-bottom-right-radius: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .curved-image-container {
+    border-bottom-right-radius: 60px;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Anchor, ArrowUpRight, X, MapPin, Calendar, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -52,6 +52,79 @@ const projects = [
 
 const categories = ["All", "Dhaka Metro Rail", "Jamuna Railway", "Matarbari Port"];
 
+function ProjectCard({ project, onClick }) {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)`;
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => onClick(project)}
+      style={{
+        willChange: "transform",
+        transition: "transform 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 400ms ease",
+      }}
+      className="group relative block h-full min-h-[350px] sm:min-h-[380px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/60 bg-slate-900/90 p-5 sm:p-7 backdrop-blur-xl hover:border-[#c7854b]/50 hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.4)] cursor-pointer flex flex-col justify-between"
+    >
+      {/* Project Thumbnail Image */}
+      <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-xl bg-slate-950 mb-5 sm:mb-6 border border-white/10">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+        <span className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[#c7854b] text-[10px] sm:text-[11px] font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider border border-white/10">
+          {project.category}
+        </span>
+      </div>
+
+      {/* Card Content */}
+      <div className="flex flex-col flex-grow justify-between">
+        <div>
+          <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-[#c7854b] transition-colors leading-snug">
+            {project.title}
+          </h3>
+          <p className="mt-2 text-xs sm:text-sm text-slate-300 line-clamp-2">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-[#c7854b]">
+          <span>View Project Details</span>
+          <div className="size-7 sm:size-8 rounded-full bg-[#8b3f80]/30 flex items-center justify-center transition-all group-hover:bg-[#8b3f80] group-hover:text-white border border-[#8b3f80]/30">
+            <ArrowUpRight className="size-3.5 sm:size-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function OurProjects() {
   const [activeTab, setActiveTab] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
@@ -80,7 +153,7 @@ export default function OurProjects() {
           </p>
         </div>
 
-        {/* Filter Tabs - Fully scrollable on smaller screens */}
+        {/* Filter Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
           {categories.map((cat) => (
             <button
@@ -106,43 +179,11 @@ export default function OurProjects() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 key={project.id}
-                onClick={() => setSelectedProject(project)}
-                className="group relative block h-full min-h-[350px] sm:min-h-[380px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/60 bg-slate-900/90 p-5 sm:p-7 backdrop-blur-xl transition-all duration-500 hover:border-[#c7854b]/50 hover:shadow-[0_20px_60px_-15px_rgba(139,63,128,0.3)] cursor-pointer flex flex-col justify-between"
+                className="h-full"
               >
-                {/* Project Thumbnail Image */}
-                <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-xl bg-slate-950 mb-5 sm:mb-6 border border-white/10">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                  <span className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-[#c7854b] text-[10px] sm:text-[11px] font-bold px-2.5 sm:px-3 py-1 rounded-full uppercase tracking-wider border border-white/10">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* Card Content */}
-                <div className="flex flex-col flex-grow justify-between">
-                  <div>
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-[#c7854b] transition-colors leading-snug">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-300 line-clamp-2">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-[#c7854b]">
-                    <span>View Project Details</span>
-                    <div className="size-7 sm:size-8 rounded-full bg-[#8b3f80]/30 flex items-center justify-center transition-all group-hover:bg-[#8b3f80] group-hover:text-white border border-[#8b3f80]/30">
-                      <ArrowUpRight className="size-3.5 sm:size-4" />
-                    </div>
-                  </div>
-                </div>
+                <ProjectCard project={project} onClick={setSelectedProject} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -150,15 +191,21 @@ export default function OurProjects() {
 
       </div>
 
-      {/* Fully Responsive Modal Popup */}
+      {/* Smooth Spring-Animated Modal Popup */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md"
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: "spring", stiffness: 350, damping: 28 }}
               className="relative w-full max-w-3xl bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header Image */}
@@ -243,7 +290,7 @@ export default function OurProjects() {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

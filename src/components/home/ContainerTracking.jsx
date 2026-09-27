@@ -19,15 +19,25 @@ export default function ContainerTracking() {
 
       <section className="relative w-full bg-slate-950 py-16 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden exo-font">
         
+        {/* Background Image with Dark Maritime Gradient Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2000&q=80"
+            alt="Global Container Terminal Port Background"
+            className="w-full h-full object-cover object-center filter brightness-[0.25] contrast-125"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950/95" />
+        </div>
+
         {/* Ambient lighting backdrop */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[#8b3f80]/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[#8b3f80]/20 rounded-full blur-[140px] pointer-events-none z-0" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none z-0" />
 
         <div className="mx-auto max-w-[1500px] relative z-10">
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 bg-[#8b3f80]/20 px-3.5 py-1.5 rounded-full w-fit mb-4 border border-[#8b3f80]/30">
+            <div className="inline-flex items-center gap-2 bg-[#8b3f80]/20 px-3.5 py-1.5 rounded-full w-fit mb-4 border border-[#8b3f80]/30 backdrop-blur-md">
               <Compass className="size-4 text-[#c7854b]" />
               <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#c7854b]">
                 GLOBAL LOGISTICS HUB
@@ -36,7 +46,7 @@ export default function ContainerTracking() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
               Real-Time Tracking & Route Planner
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-slate-400">
+            <p className="mt-4 text-base sm:text-lg text-slate-300">
               Monitor your container shipments live across global sea lanes or instantly calculate transit routes and schedules.
             </p>
 
@@ -46,8 +56,8 @@ export default function ContainerTracking() {
                 onClick={() => setActiveTab("track")}
                 className={`px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all ${
                   activeTab === "track"
-                    ? "bg-[#8b3f80] text-white shadow-lg shadow-[#8b3f80]/30"
-                    : "bg-slate-900 text-slate-400 border border-white/10 hover:text-white"
+                    ? "bg-[#8b3f80] text-white"
+                    : "bg-slate-900/80 backdrop-blur-md text-slate-400 border border-white/10 hover:text-white"
                 }`}
               >
                 Track Shipment
@@ -56,11 +66,11 @@ export default function ContainerTracking() {
                 onClick={() => setActiveTab("quote")}
                 className={`px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all ${
                   activeTab === "quote"
-                    ? "bg-[#8b3f80] text-white shadow-lg shadow-[#8b3f80]/30"
-                    : "bg-slate-900 text-slate-400 border border-white/10 hover:text-white"
+                    ? "bg-[#8b3f80] text-white"
+                    : "bg-slate-900/80 backdrop-blur-md text-slate-400 border border-white/10 hover:text-white"
                 }`}
               >
-                Instant Route Quote[cite: 3]
+                Instant Route Quote
               </button>
             </div>
           </div>
@@ -68,8 +78,8 @@ export default function ContainerTracking() {
           {/* Main Interactive Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Side: Interactive Form Box (Inspired by Source[cite: 3]) */}
-            <div className="lg:col-span-5 bg-slate-900/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl shadow-black/50">
+            {/* Left Side: Interactive Form Box */}
+            <div className="lg:col-span-5 bg-slate-900/85 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10">
               {activeTab === "track" ? (
                 <div className="space-y-6">
                   <div>
@@ -96,7 +106,7 @@ export default function ContainerTracking() {
 
                     <button
                       onClick={() => alert(`Tracking status requested for: ${trackingId || "Sample Container"}`)}
-                      className="w-full py-4 rounded-xl bg-[#8b3f80] hover:bg-[#c7854b] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#8b3f80]/30 transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 rounded-xl bg-[#8b3f80] hover:bg-[#c7854b] text-white font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2"
                     >
                       Track Live Status
                       <ArrowRight className="size-4" />
@@ -104,11 +114,11 @@ export default function ContainerTracking() {
                   </div>
 
                   <div className="pt-4 border-t border-white/10 space-y-2.5">
-                    <div className="flex items-center gap-2 text-xs text-slate-400">
+                    <div className="flex items-center gap-2 text-xs text-slate-300">
                       <CheckCircle2 className="size-4 text-[#c7854b]" />
                       <span>24/7 Satellite IoT container monitoring</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-400">
+                    <div className="flex items-center gap-2 text-xs text-slate-300">
                       <CheckCircle2 className="size-4 text-[#c7854b]" />
                       <span>Real-time port customs update alerts</span>
                     </div>
@@ -118,7 +128,7 @@ export default function ContainerTracking() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-1">Instant Route Quote</h3>
-                    <p className="text-xs text-slate-400">Select origin and destination ports for transit estimates[cite: 3].</p>
+                    <p className="text-xs text-slate-400">Select origin and destination ports for transit estimates.</p>
                   </div>
 
                   <div className="space-y-4">
@@ -148,22 +158,22 @@ export default function ContainerTracking() {
 
                     <button
                       onClick={() => alert(`Calculating route from ${origin} to ${destination}...`)}
-                      className="w-full py-4 rounded-xl bg-[#8b3f80] hover:bg-[#c7854b] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#8b3f80]/30 transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 rounded-xl bg-[#8b3f80] hover:bg-[#c7854b] text-white font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2"
                     >
-                      Calculate Route & Rates[cite: 3]
+                      Calculate Route & Rates
                       <ArrowRight className="size-4" />
                     </button>
                   </div>
 
-                  <p className="text-[11px] text-slate-500 text-center">
-                    Note: Verification process for new enterprise accounts takes up to 3 working days[cite: 3].
+                  <p className="text-[11px] text-slate-400 text-center">
+                    Note: Verification process for new enterprise accounts takes up to 3 working days.
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Right Side: Visual Route Map (Inspired by Source[cite: 2]) */}
-            <div className="lg:col-span-7 relative bg-slate-900/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10 overflow-hidden flex flex-col justify-between min-h-[420px]">
+            {/* Right Side: Visual Route Map */}
+            <div className="lg:col-span-7 relative bg-slate-900/75 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10 overflow-hidden flex flex-col justify-between min-h-[420px]">
               
               {/* Map Header / Title */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 z-10">
@@ -172,7 +182,7 @@ export default function ContainerTracking() {
                   <h3 className="text-lg sm:text-xl font-bold text-white">Asia - Middle East - Africa Corridor</h3>
                 </div>
                 
-                {/* Legend Box (Inspired by Source[cite: 2]) */}
+                {/* Legend Box */}
                 <div className="bg-slate-950/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10 text-xs space-y-1">
                   <div className="flex items-center justify-between gap-4 text-slate-300">
                     <span className="font-medium">EASTBOUND</span>
@@ -191,7 +201,6 @@ export default function ContainerTracking() {
                 
                 {/* Simulated SVG Sea Route Lines */}
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 600 250" fill="none">
-                  {/* Eastbound Line */}
                   <path
                     d="M 80,180 Q 250,50 520,100"
                     stroke="#3b82f6"
@@ -199,7 +208,6 @@ export default function ContainerTracking() {
                     strokeDasharray="6 6"
                     className="animate-pulse"
                   />
-                  {/* Westbound Line */}
                   <path
                     d="M 520,120 Q 300,220 80,200"
                     stroke="#8b3f80"
@@ -210,34 +218,34 @@ export default function ContainerTracking() {
                 {/* Major Port Nodes */}
                 <div className="absolute left-[10%] bottom-[20%] flex flex-col items-center">
                   <div className="size-3.5 rounded-full bg-[#8b3f80] animate-ping absolute" />
-                  <div className="size-3.5 rounded-full bg-[#8b3f80] border-2 border-white shadow-md relative z-10" />
-                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/80 px-2 py-0.5 rounded">Chittagong</span>
+                  <div className="size-3.5 rounded-full bg-[#8b3f80] border-2 border-white relative z-10" />
+                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/90 px-2 py-0.5 rounded border border-white/10">Chittagong</span>
                 </div>
 
                 <div className="absolute left-[45%] top-[25%] flex flex-col items-center">
-                  <div className="size-3 rounded-full bg-[#c7854b] border-2 border-white shadow-md relative z-10" />
-                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/80 px-2 py-0.5 rounded">Jebel Ali</span>
+                  <div className="size-3 rounded-full bg-[#c7854b] border-2 border-white relative z-10" />
+                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/90 px-2 py-0.5 rounded border border-white/10">Jebel Ali</span>
                 </div>
 
                 <div className="absolute right-[12%] top-[35%] flex flex-col items-center">
-                  <div className="size-3.5 rounded-full bg-[#3b82f6] border-2 border-white shadow-md relative z-10" />
-                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/80 px-2 py-0.5 rounded">Durban / Cape Town</span>
+                  <div className="size-3.5 rounded-full bg-[#3b82f6] border-2 border-white relative z-10" />
+                  <span className="text-[11px] font-bold text-white mt-1.5 bg-slate-950/90 px-2 py-0.5 rounded border border-white/10">Durban / Cape Town</span>
                 </div>
               </div>
 
               {/* Bottom Transit Info Summary */}
               <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 z-10">
-                <div className="bg-slate-950/50 p-3 rounded-xl border border-white/5">
+                <div className="bg-slate-950/60 p-3 rounded-xl border border-white/5">
                   <span className="text-[10px] sm:text-xs text-slate-400 block font-medium">Avg. Transit</span>
                   <span className="text-xs sm:text-sm font-bold text-white">14 - 21 Days</span>
                 </div>
-                <div className="bg-slate-950/50 p-3 rounded-xl border border-white/5">
+                <div className="bg-slate-950/60 p-3 rounded-xl border border-white/5">
                   <span className="text-[10px] sm:text-xs text-slate-400 block font-medium">Vessel Status</span>
                   <span className="text-xs sm:text-sm font-bold text-emerald-400 flex items-center gap-1">
                     <span className="size-2 rounded-full bg-emerald-400 animate-pulse" /> On Schedule
                   </span>
                 </div>
-                <div className="bg-slate-950/50 p-3 rounded-xl border border-white/5">
+                <div className="bg-slate-950/60 p-3 rounded-xl border border-white/5">
                   <span className="text-[10px] sm:text-xs text-slate-400 block font-medium">Security</span>
                   <span className="text-xs sm:text-sm font-bold text-white">ISO Certified</span>
                 </div>

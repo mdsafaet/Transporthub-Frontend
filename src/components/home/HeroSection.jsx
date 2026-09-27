@@ -13,19 +13,19 @@ import "swiper/css/pagination";
 const slides = [
   {
     id: 1,
-    image: "https://picsum.photos/1920/1080?random=1",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80",
     title: "Global Container Shipping & Logistics",
     subtitle: "Connecting ports worldwide with precision, reliability, and seamless transport solutions.",
   },
   {
     id: 2,
-    image: "https://picsum.photos/1920/1080?random=2",
+    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80",
     title: "Advanced Reefer Container Solutions",
     subtitle: "Advanced cold-chain solutions designed to keep your perishable cargo fresh and secure across oceans.",
   },
   {
     id: 3,
-    image: "https://picsum.photos/1920/1080?random=3",
+    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1920&q=80",
     title: "Seamless Door-to-Door Transport",
     subtitle: "From vessel to final warehouse delivery, we manage your supply chain with complete transparency.",
   },
@@ -35,7 +35,7 @@ export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <section className="relative h-[90vh] min-h-[650px] w-full overflow-hidden bg-black pt-24">
+    <section className="relative h-[90vh] min-h-[650px] w-full overflow-hidden bg-black pt-24 exo-font">
       <Swiper
         modules={[Autoplay, EffectFade, Pagination]}
         effect="fade"
@@ -46,12 +46,12 @@ export default function HeroSection() {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="relative h-full w-full overflow-hidden">
-            {/* Background Image with Fade/Slide Animation */}
+            {/* Background Image with Zoom-In Animation */}
             {currentSlide === index && (
               <motion.div
-                initial={{ x: index % 2 === 0 ? "-100%" : "100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
+                initial={{ scale: 1.0, opacity: 0 }}
+                animate={{ scale: 1.15, opacity: 1 }}
+                transition={{ duration: 7.5, ease: "easeOut" }}
                 className="absolute inset-0"
               >
                 <img
@@ -63,7 +63,7 @@ export default function HeroSection() {
               </motion.div>
             )}
 
-            {/* Content Container (Rendered exclusively for the active slide to prevent overlap) */}
+            {/* Content Container */}
             {currentSlide === index && (
               <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-center px-6 md:px-12 lg:px-20">
                 <motion.div
