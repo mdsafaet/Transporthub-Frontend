@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export default function GetInTouch() {
   return (
-    <section className="overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-   <div className="mx-auto w-full max-w-[1600px] lg:-translate-x-8">
-        <div className="grid lg:grid-cols-[52%_48%]">
+    <section className="overflow-hidden bg-white px-4 py-12 font-['Exo',sans-serif] sm:px-8 md:px-12 lg:px-20 lg:py-24">
+      <div className="mx-auto w-full max-w-[1700px]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Image */}
           <div className="relative h-[280px] overflow-hidden rounded-br-[120px] bg-slate-900 sm:h-[340px] lg:h-[420px] lg:rounded-br-[180px]">
             <img
@@ -25,13 +25,15 @@ export default function GetInTouch() {
           </div>
 
           {/* Content */}
-          <div className="min-w-0 px-2 py-8 text-center lg:flex lg:h-[420px] lg:flex-col lg:justify-center lg:px-0 lg:pl-6 lg:text-left">
-            {/* Equal upper and lower rows keep the heading centered. */}
-            <div aria-hidden="true" className="hidden lg:block lg:flex-1" />
+          <div className="min-w-0 px-2 py-8 text-center lg:flex lg:h-[420px] lg:flex-col lg:px-0 lg:py-0 lg:text-left">
+            <div
+              aria-hidden="true"
+              className="hidden lg:block lg:flex-1"
+            />
 
             <div className="hidden shrink-0 items-center gap-5 lg:flex">
               <h2 className="relative whitespace-nowrap text-[66px] font-medium not-italic leading-[1.1] tracking-normal text-[#18324f] xl:text-[74px]">
-                <span className="absolute right-full top-0 pr-6 text-white">
+                <span className="absolute right-full top-0 pr-8 text-white">
                   Get In
                 </span>
                 Touch
