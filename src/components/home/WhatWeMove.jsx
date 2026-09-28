@@ -77,7 +77,7 @@ function TiltCard({ children, bgClass }) {
           rotateY: reduceMotion ? 0 : rotateY,
           y: reduceMotion ? 0 : lift,
         }}
-     className={`relative flex h-[280px] flex-col justify-between rounded-[16px] rounded-tr-[80px] p-8 shadow-xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)] motion-reduce:transition-none sm:h-[340px] sm:p-12 md:p-16 lg:h-[420px] lg:rounded-tr-[120px] ${bgClass}`}
+     className={`relative flex h-[280px] flex-col justify-between rounded-none rounded-tr-[120px] p-8 shadow-xl transition-shadow duration-300 hover:shadow-[0_25px_50px_-12px_rgba(139,63,128,0.25)] motion-reduce:transition-none sm:h-[340px] sm:p-12 md:p-16 lg:h-[420px] lg:rounded-tr-[180px] ${bgClass}`}
       >
         {children}
       </motion.div>
