@@ -63,7 +63,7 @@ export default function AboutUs() {
       <div className="mx-auto max-w-[1500px]">
         
         {/* Centered Container Wrapper */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center text-center">
           
           <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-[#8b3f80]/15 bg-[#8b3f80]/[0.06] px-3.5 py-1.5">
             <Globe2 className="size-4 text-[#8b3f80]" />
@@ -73,7 +73,7 @@ export default function AboutUs() {
           </div>
 
           <h2 className="text-3xl font-bold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-4xl lg:text-[46px] xl:text-[52px]">
-            Connecting Global Ports with Precision 
+            Connecting Global Ports 
           </h2>
 
           <p className="mt-5 text-sm font-normal leading-7 text-slate-600 sm:text-base md:text-[17px]">
